@@ -3,11 +3,21 @@ entries:
   helm-chart-test:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-12-15T10:05:32.405683704Z
+    created: 2019-12-16T06:58:47.569397839Z
     description: A Helm chart for Kubernetes
     digest: cb91d0f7bcc5763964a880426a91e65f51a769f8c0666c81d6e12df422c9c063
     name: helm-chart-test
     urls:
     - https://jameseck.github.io/helm-charts/helm-chart-test-0.1.0.tgz
     version: 0.1.0
-generated: 2019-12-15T10:05:32.405222182Z
+  hs1xx-exporter:
+  - apiVersion: v1
+    appVersion: "1.1"
+    created: 2019-12-16T06:58:47.570356945Z
+    description: hs1xx Expoter
+    digest: 54e8638be90463a52b6db450936c0b149d64396c091686e59582ebfaa7410ff4
+    name: hs1xx-exporter
+    urls:
+    - https://jameseck.github.io/helm-charts/hs1xx-exporter-0.1.0.tgz
+    version: 0.1.0
+generated: 2019-12-16T06:58:47.567430174Z
