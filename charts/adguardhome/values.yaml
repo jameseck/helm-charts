@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: docker.io/adguard/adguradhome
+  repository: docker.io/adguard/adguardhome
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: latest
 
 imagePullSecrets: []
 nameOverride: ""
@@ -32,7 +32,7 @@ persistence:
   conf:
     storageClass: ""
     existingClaim: ""
-    enabled: true
+    enabled: false
     accessMode: ReadWriteOnce
     size: 100Mi
   work:
@@ -49,6 +49,10 @@ securityContext:
   # readOnlyRootFilesystem: true
   runAsNonRoot: true
   runAsUser: 1000
+
+secret:
+  username: admin
+  password: admin
 
 services:
   dhcp:

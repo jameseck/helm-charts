@@ -9,6 +9,8 @@ spec:
   selector:
     matchLabels:
       {{- include "adguardhome.selectorLabels" . | nindent 6 }}
+  strategy:
+    type: Recreate
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -25,6 +27,34 @@ spec:
       serviceAccountName: {{ include "adguardhome.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+      - name: conf-init
+        image: httpd:2.4.51-alpine
+        env:
+        - name: ADGUARD_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "adguardhome.fullname" . }}
+              key: username
+        - name: ADGUARD_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "adguardhome.fullname" . }}
+              key: password
+        command:
+        - /bin/sh
+        - -c
+        - |
+          if [ ! -e /opt/adguardhome/conf/AdGuardHome.yaml ]; then
+            cp /tmp/AdGuardHome.yaml /opt/adguardhome/conf/AdGuardHome.yaml
+            sed -i -e "s@#ADGUARD_USERNAME#@${ADGUARD_USERNAME}@g" /opt/adguardhome/conf/AdGuardHome.yaml
+            sed -i -e "s@#ADGUARD_PASSWORD#@$(htpasswd -b -n -B -C 10 '' ${ADGUARD_PASSWORD} | tr -d ':')@g" /opt/adguardhome/conf/AdGuardHome.yaml
+          fi
+        volumeMounts:
+        - name: conf
+          mountPath: /opt/adguardhome/conf
+        - name: config-seed
+          mountPath: /tmp
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -44,14 +74,18 @@ spec:
             - name: web-init
               containerPort: 3000
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
           readinessProbe:
             httpGet:
-              path: /
-              port: http
+              path: /login.html
+              port: 8080
+            initialDelaySeconds: 2
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /login.html
+              port: 8080
+            initialDelaySeconds: 2
+            timeoutSeconds: 5
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
@@ -86,3 +120,6 @@ spec:
         {{- else }}
         emptyDir: {}
         {{- end }}
+      - name: config-seed
+        configMap:
+          name: {{ include "adguardhome.fullname" . }}-seed
