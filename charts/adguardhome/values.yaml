@@ -59,56 +59,68 @@ services:
     enabled: false
     type: LoadBalancer
     ports:
-    - port: 67
+    - name: dhcp-67
+      port: 67
       protocol: UDP
-    - port: 68
+    - name: dhcp-68
+      port: 68
       protocol: UDP
   dns:
     enabled: true
     type: LoadBalancer
     ports:
-    - port: 53
+    - name: dns-tcp
+      port: 53
       protocol: TCP
       targetPort: 5353
-    - port: 53
+    - name: dns-udp
+      port: 53
       protocol: UDP
       targetPort: 5353
   web:
     enabled: true
     type: ClusterIP
     ports:
-    - port: 80
+    - name: web-80
+      port: 80
       protocol: TCP
       targetPort: 8080
-    - port: 443
+    - name: web-443
+      port: 443
       protocol: TCP
-    - port: 443
+    - name: web-443-udp
+      port: 443
       protocol: UDP
   web-init:
     enabled: true
     type: ClusterIP
     ports:
-    - port: 3000
+    - name: web-init
+      port: 3000
       protocol: TCP
   dot:
     enabled: false
     type: ClusterIP
     ports:
-    - port: 853
+    - name: dot-tcp
+      port: 853
       protocol: TCP
   doq:
     enabled: false
     type: ClusterIP
     ports:
-    - port: 853
+    - name: doq-udp
+      port: 853
       protocol: UDP
   dnscrypt:
     enabled: false
     type: ClusterIP
     ports:
-    - port: 5443
+    - name: dnscrypt-tcp
+      port: 5443
       protocol: TCP
-    - port: 5443
+    - name: dnscrypt-udp
+      port: 5443
       protocol: UDP
 
 ingress:
