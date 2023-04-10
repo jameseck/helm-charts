@@ -27,6 +27,12 @@ podAnnotations: {}
 
 podSecurityContext:
   fsGroup: 2000
+  runAsNonRoot: true
+  runAsUser: 1000
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
 
 persistence:
   conf:
@@ -41,14 +47,6 @@ persistence:
     enabled: true
     accessMode: ReadWriteOnce
     size: 800Mi
-
-securityContext:
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  runAsNonRoot: true
-  runAsUser: 1000
 
 secret:
   username: admin
