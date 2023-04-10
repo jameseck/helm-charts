@@ -1,0 +1,17 @@
+{{- range $k,$v := .Values.persistence }}
+{{- if and $v.enabled (not $v.existingClaim) }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+ name: {{ include "adguardhome.fullname" $ }}-{{ $k }}
+ labels:
+   {{- include "adguardhome.labels" $ | nindent 4 }}
+spec:
+ storageClassName: {{ $v.storageClass }}
+ accessModes:
+   - {{ $v.accessMode | quote }}
+ resources:
+   requests:
+     storage: {{ $v.size | quote }}
+ {{- end }}
+{{- end }}

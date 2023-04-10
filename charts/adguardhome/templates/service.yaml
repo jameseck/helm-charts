@@ -1,0 +1,17 @@
+{{- range $svc,$v := .Values.services }}
+{{- if $v.enabled }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "adguardhome.fullname" $ }}-{{ $svc }}
+  labels:
+    {{- include "adguardhome.labels" $ | nindent 4 }}
+spec:
+  type: {{ $v.type }}
+  ports:
+  {{- toYaml $v.ports | nindent 4 }}
+  selector:
+    {{- include "adguardhome.selectorLabels" $ | nindent 4 }}
+{{- end }}
+{{- end }}
