@@ -48,7 +48,13 @@ persistence:
     accessMode: ReadWriteOnce
     size: 800Mi
 
+sealed_secret:
+  create: true
+  username: admin
+  password: AgArgErEa4GE2mvy/Prdm4hF4sKN3AkEvbdrnTM2dIT9JcsfwZKCyHji3rucVM/RUsjyu45d5cL6LnauI7nNK8BW27UF9EfYsZ46Bw4VhEMFmY28bJlQdTdq/is5Hc9QKzrZwN/QR38ebZitxVjvW4fQdnHdRY3l363OlGeEG3I5SGa8pGjxUmjAZRt5MnN3IHcSE7PYcSpE2hxrQZ5lJXpfaUfubIjY6Sv1ywjRyW9buKnkFh6IVTb1o9NCmnKverkls3CSYpCXZaAS4qjvRWAH3ce6QLV5rP/PjnWWIZVDUcQ84T9ClWTdhioC8AqAqPf9XBHVwDCOfvujsEFS5ul8aIINMI3I63N+XMUloDUKruiJK3yEpIa6Jk+eCKl6TKoHOUEjQksKxov/QZhSTVkTDf96ti2VbOPdEcV3rolOfAXkEaAqviDN0cypQCC4FaCbwFA3eTlhpmcJwTaU9TmYc5CF0IJBVED+HWYRHt7thghUk0iNS60YrejdE7/mC82BlqGoL37MuR35PBj6xzK/WOLjkco2lk/kGk0cs5bpteVhwYAJUPywrmZutn+CPnqXFZC7SYVQM3kCd49BRy6a9robiIuUiNItin1P+jRVOtCeWaOGl06rPSrUEzjlCNma2xyGSEimFtooz8qF7GpqLdpSCWeM8GBjYZrik6Mory+lfVWTDFv54/ZaPGaiUaE5kRaz8PwwOIcakUGAOg==
+
 secret:
+  create: false
   username: admin
   password: admin
 
