@@ -61,6 +61,17 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/adguardhome-0.1.0/adguardhome-0.1.0.tgz
     version: 0.1.0
+  sealed-secrets:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-04-11T20:23:53.097551583Z"
+    description: A helper chart to deploy sealed secrets
+    digest: d80f92e7e6377c86a6a9ebb3e2f8465752ca4003f03974a052c5855e1e966619
+    name: sealed-secrets
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/sealed-secrets-0.1.0/sealed-secrets-0.1.0.tgz
+    version: 0.1.0
   test-app:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -72,4 +83,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/test-app-0.1.0/test-app-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-10T19:16:20.145554699Z"
+generated: "2023-04-11T20:23:53.097563983Z"
