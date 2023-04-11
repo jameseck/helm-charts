@@ -1,34 +1,17 @@
-issuers:
-- name: letsencrypt-prod
-  kind: ClusterIssuer
-  spec:
-    acme:
-      email: {{ lookup('bitwarden', 'cloudflare-api-token-jehome.co.uk', field='username', sync=True) }}
-      server: https://acme-v02.api.letsencrypt.org/directory
-      privateKeySecretRef:
-        name: letsencrypt-prod
-      solvers:
-      - dns01:
-          cloudflare:
-            email: {{ lookup('bitwarden', 'cloudflare-api-token-jehome.co.uk', field='username', sync=True) }}
-            apiTokenSecretRef:
-              name: cloudflare-api-token
-              key: api-token
-        selector: {}
-- name: letsencrypt-staging
-  kind: ClusterIssuer
-  spec:
-    acme:
-      email: {{ lookup('bitwarden', 'cloudflare-api-token-jehome.co.uk', field='username', sync=True) }}
-      server: https://acme-staging-v02.api.letsencrypt.org/directory
-      privateKeySecretRef:
-        name: letsencrypt-staging
-      solvers:
-      - dns01:
-          cloudflare:
-            email: {{ lookup('bitwarden', 'cloudflare-api-token-jehome.co.uk', field='username', sync=True) }}
-            apiTokenSecretRef:
-              name: cloudflare-api-token
-              key: api-token
-
-
+#issuers:
+#- name: letsencrypt-prod
+#  kind: ClusterIssuer
+#  spec:
+#    acme:
+#      email: bob@example.com
+#      server: https://acme-v02.api.letsencrypt.org/directory
+#      privateKeySecretRef:
+#        name: letsencrypt-prod
+#      solvers:
+#      - dns01:
+#          cloudflare:
+#            email: bob@example.com
+#            apiTokenSecretRef:
+#              name: cloudflare-api-token
+#              key: api-token
+#        selector: {}
