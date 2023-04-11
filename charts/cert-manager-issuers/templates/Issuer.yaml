@@ -1,0 +1,8 @@
+{{- range $iss := .Values.issuers }}
+---
+apiVersion: cert-manager.io/v1
+kind: {{ $iss.kind | default "ClusterIssuer" }}
+metadata:
+  name: {{ $iss.name }}
+spec:
+{{- $iss.spec | toYaml | nindent 2 }}
