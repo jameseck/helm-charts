@@ -1,0 +1,13 @@
+#secrets:
+#  - name: example-opaque
+#    data:
+#      username: <encrypted username value>
+#      password: <encrypted password value>
+#  # Basic auth for example bound to jenkins
+#  - name: example-basic-auth
+#    type: kubernetes.io/basic-auth
+#    labels:
+#      credential.sync.jenkins.openshift.io: "true"
+#    data:
+#      username: <encrypted username value>
+#      password: <encrypted password value>
