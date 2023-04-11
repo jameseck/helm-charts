@@ -64,6 +64,16 @@ entries:
   cert-manager-issuers:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2023-04-11T21:02:15.035175147Z"
+    description: A helper chart to deploy cert-manager [Cluster]Issuers
+    digest: 5d53ca20a764925e738aab0d3177478a0adce1895440a412c914ea6a2af8e0b1
+    name: cert-manager-issuers
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/cert-manager-issuers-0.1.1/cert-manager-issuers-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2023-04-11T20:55:52.047611044Z"
     description: A helper chart to deploy cert-manager [Cluster]Issuers
     digest: c558fd8f2050a56b241663886525545f6940b65ed885650218b51d35cf997f59
@@ -94,4 +104,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/test-app-0.1.0/test-app-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-11T20:55:52.047626343Z"
+generated: "2023-04-11T21:02:15.035189047Z"
