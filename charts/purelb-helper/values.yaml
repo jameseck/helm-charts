@@ -1,0 +1,9 @@
+---
+# serviceGroups:
+# - name: default
+#   namespace: purelb
+#   spec:
+#     local:
+#       v4pool:
+#         aggregation: default
+#         ...

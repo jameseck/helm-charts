@@ -1,0 +1,10 @@
+{{- range $sg := .Values.serviceGroups }}
+---
+apiVersion: purelb.io/v1
+kind: ServiceGroup
+metadata:
+  name: {{ $sg.name }}
+  namespace: {{ $sg.namespace }}
+spec:
+{{- $sg.spec | toYaml | nindent 2 }}
+{{- end }}
