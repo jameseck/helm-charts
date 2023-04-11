@@ -61,6 +61,17 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/adguardhome-0.1.0/adguardhome-0.1.0.tgz
     version: 0.1.0
+  cert-manager-issuers:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-04-11T20:55:52.047611044Z"
+    description: A helper chart to deploy cert-manager [Cluster]Issuers
+    digest: c558fd8f2050a56b241663886525545f6940b65ed885650218b51d35cf997f59
+    name: cert-manager-issuers
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/cert-manager-issuers-0.1.0/cert-manager-issuers-0.1.0.tgz
+    version: 0.1.0
   sealed-secrets:
   - apiVersion: v2
     appVersion: 1.0.0
@@ -83,4 +94,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/test-app-0.1.0/test-app-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-11T20:23:53.097563983Z"
+generated: "2023-04-11T20:55:52.047626343Z"
