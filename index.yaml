@@ -82,6 +82,17 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/cert-manager-issuers-0.1.0/cert-manager-issuers-0.1.0.tgz
     version: 0.1.0
+  purelb-helper:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-04-11T21:39:54.051870335Z"
+    description: A helper chart to deploy purelb crds
+    digest: 82fbf8ac4ab435fe40d43363476f3c6726215fc87a2b55b9eb8b636747e29d67
+    name: purelb-helper
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/purelb-helper-0.1.0/purelb-helper-0.1.0.tgz
+    version: 0.1.0
   sealed-secrets:
   - apiVersion: v2
     appVersion: 1.0.0
@@ -104,4 +115,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/test-app-0.1.0/test-app-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-11T21:02:15.035189047Z"
+generated: "2023-04-11T21:39:54.051897636Z"
