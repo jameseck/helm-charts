@@ -6,3 +6,4 @@ metadata:
   name: {{ $iss.name }}
 spec:
 {{- $iss.spec | toYaml | nindent 2 }}
+{{- end }}
