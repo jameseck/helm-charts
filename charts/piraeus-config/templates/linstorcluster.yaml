@@ -4,6 +4,8 @@ apiVersion: piraeus.io/v1
 kind: LinstorCluster
 metadata:
   name: {{ $cl.name }}
+{{- if $cl.spec }}
 spec:
 {{ $cl.spec | toYaml }}
+{{- end }}
 {{- end }}
