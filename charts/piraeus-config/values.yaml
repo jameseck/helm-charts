@@ -8,3 +8,7 @@
 #      - name: pool1
 #        fileThinPool:
 #          directory: /var/lib/piraeus-datastore/pool1
+
+#linstorSatelliteConfigurations:
+#- name: custom-drbd-module-loader-image
+#  spec:

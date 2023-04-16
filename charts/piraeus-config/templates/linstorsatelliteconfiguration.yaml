@@ -1,0 +1,9 @@
+{{- range $sc := .Values.linstorSatelliteConfigurations }}
+---
+apiVersion: piraeus.io/v1
+kind: LinstorSatelliteConfiguration
+metadata:
+  name: {{ $sc.name }}
+spec:
+{{ $sc.spec | toYaml | nindent 2 }}
+{{- end }}
