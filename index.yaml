@@ -146,6 +146,17 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/sealed-secrets-0.1.0/sealed-secrets-0.1.0.tgz
     version: 0.1.0
+  storageclasses:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-04-16T07:29:36.764782799Z"
+    description: A Helm chart
+    digest: 0c34b25b9abc62b1825032114d1177d047a6671b5ecfec7562a3946d9aa32628
+    name: storageclasses
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/storageclasses-0.1.1/storageclasses-0.1.1.tgz
+    version: 0.1.1
   test-app:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -157,4 +168,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/test-app-0.1.0/test-app-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-16T06:57:21.924833973Z"
+generated: "2023-04-16T07:29:36.764811899Z"
