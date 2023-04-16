@@ -127,6 +127,16 @@ entries:
   piraeus-config:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2023-04-16T07:56:22.513918396Z"
+    description: A Helm chart
+    digest: 92e727296ad10d0f495bb45abe3034cc4e62b557b02971338f0506052134e097
+    name: piraeus-config
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/piraeus-config-0.1.3/piraeus-config-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2023-04-16T07:44:08.0388621Z"
     description: A Helm chart
     digest: 696cf6baab772ab8ede7e5a2f4c93f6948f4eb6ab762eb078a8a064251a13056
@@ -199,4 +209,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/test-app-0.1.0/test-app-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-16T07:44:08.0388922Z"
+generated: "2023-04-16T07:56:22.513944495Z"
