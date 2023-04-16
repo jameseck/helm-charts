@@ -5,5 +5,5 @@ kind: LinstorCluster
 metadata:
   name: {{ $cl.name }}
 spec:
-{{ $cl | toYaml }}
+{{ $cl.spec | toYaml }}
 {{- end }}
