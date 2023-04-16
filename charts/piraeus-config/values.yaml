@@ -1,0 +1,10 @@
+#linstorClusters:
+#- name: linstorcluster
+
+#storagePools:
+#- name: storage-pool
+#  spec:
+#    storagePools:
+#      - name: pool1
+#        fileThinPool:
+#          directory: /var/lib/piraeus-datastore/pool1
