@@ -1,0 +1,7 @@
+apiVersion: v2
+name: kea-dhcp
+description: A chart to deploy kea dhcp
+type: application
+
+version: 0.1.0
+appVersion: "1.0.0"

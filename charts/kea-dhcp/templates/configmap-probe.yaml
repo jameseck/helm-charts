@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: {{ include "keadhcp.fullname" . }}-probe
+data:
+  probe.py: |
+    #!/usr/bin/python3
+    import json
+    from urllib import request
+
+    assert json.loads(request.urlopen(request.Request(
+        'http://localhost:8000',
+        headers={'Content-Type': 'application/json'},
+        data=json.dumps({"command": "status-get", "service": ["dhcp4"]}).encode(),
+    )).read())[0]['result'] == 0

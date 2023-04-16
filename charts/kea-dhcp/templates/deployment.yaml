@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "keadhcp.fullname" . }}
+  labels:
+    {{- include "keadhcp.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "keadhcp.selectorLabels" . | nindent 6 }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "keadhcp.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "keadhcp.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: ctrl-agent
+          image: docker.io/jonasal/kea-ctrl-agent:2.3.3-alpine
+          args: [ "-c", "kea/config/config.json" ]
+          volumeMounts:
+          - name: probe
+            mountPath: /probe
+          - name: sockets
+            mountPath: /kea/sockets
+          - name: ctrl-agent-config
+            mountPath: /kea/config
+          readinessProbe:
+            exec:
+              command:
+              - /usr/bin/python3
+              - /probe/probe.py
+            initialDelaySeconds: 2
+            timeoutSeconds: 5
+          livenessProbe:
+            exec:
+              command:
+              - /usr/bin/python3
+              - /probe/probe.py
+            initialDelaySeconds: 2
+            timeoutSeconds: 5
+
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args: [ "-c", "kea/config/dhcp4.json" ]
+          ports:
+            - name: dhcp-udp
+              containerPort: 67
+              protocol: UDP
+          readinessProbe:
+            exec:
+              command:
+              - pgrep
+              - kea-dhcp4
+          livenessProbe:
+            exec:
+              command:
+              - pgrep
+              - kea-dhcp4
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+          - name: config
+            mountPath: /kea/config
+          - name: leases
+            mountPath: /kea/leases
+          - name: sockets
+            mountPath: /kea/sockets
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+      - name: config
+        configMap:
+          name: {{ include "keadhcp.fullname" . }}
+      - name: leases
+        {{- if .Values.persistence.leases.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.persistence.leases.existingClaim | default (print (include "keadhcp.fullname" $) "-leases") }}
+        {{- else }}
+        emptyDir: {}
+        {{- end }}
+      - name: sockets
+        emptyDir: {}
+      - name: ctrl-agent-config
+        configMap:
+          name: {{ include "keadhcp.fullname" . }}-ctrl-agent
+      - name: probe
+        configMap:
+          name: {{ include "keadhcp.fullname" . }}-probe

@@ -1,0 +1,430 @@
+---
+
+replicaCount: 1
+
+image:
+  repository: docker.io/jonasal/kea-dhcp4
+  pullPolicy: IfNotPresent
+  tag: 2.3.3-alpine
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  fsGroup: 2000
+  runAsNonRoot: false
+  runAsUser: 0
+  # capabilities:
+  #   drop:
+  #   - ALL
+
+persistence:
+  leases:
+    storageClass: ""
+    existingClaim: ""
+    enabled: false
+    accessMode: ReadWriteOnce
+    size: 100Mi
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+
+
+dhcp_global_default_lease_time: 28800   # 8hrs
+dhcp_global_max_lease_time: 43200       # 12 hrs
+dhcp_global_authoritative: authoritative
+dhcp_global_bootp: allow
+dhcp_global_booting: allow
+dhcp6_enable: false
+
+Dhcp4:
+  interfaces-config:
+    interfaces:
+    - "*"
+    dhcp-socket-type: raw
+  valid-lifetime: 4000
+  renew-timer: 1000
+  rebind-timer: 2000
+  subnet4:
+  - subnet: 172.17.0.0/16
+    pools:
+    - pool: 172.17.0.2-172.17.0.10
+  reservations: []
+  loggers:
+  - name: kea-dhcp4
+    severity: INFO
+    output_options:
+    - output: stdout
+      pattern: "%D{%Y-%m-%d %H:%M:%S.%q} %-5p [%c/%i.%t] %m\n"
+  control-socket:
+    socket-type: unix
+    socket-name: /kea/sockets/dhcp4.socket
+
+vlans:
+- name: ONE
+  vlan: 1
+  tagged: no
+  subnet: 192.168.0.0
+  netmask: 255.255.255.0
+  cidr: 24
+  gateway: 192.168.0.1
+#  enable_dhcp: no
+#  enable_bind: no
+  dhcp: &dhcpip1 192.168.0.2
+  dns: *dhcpip1
+  ntp: *dhcpip1
+  range_begin: 192.168.0.100
+  range_end: 192.168.0.149
+  domain: je.home
+  hosts:
+  - name: dhcp
+    ip: *dhcpip1
+    device_type: Linux
+    device_role: Linux
+  - name: icx6450
+    ip: 192.168.0.1
+    mac: 60:9c:9f:16:94:60
+  - name: unifiproap
+    ip: 192.168.0.3
+    mac: 18:e8:29:66:99:35
+    device_type: Linux
+    device_role: Linux
+  - name: proxy
+    ip: 192.168.0.4
+    mac: 52:54:00:23:55:3d
+    device_type: Linux
+    device_role: Linux
+  - name: unifiap
+    ip: 192.168.0.5
+    mac: f0:9f:c2:f3:ca:2f
+    device_type: Linux
+    device_role: Linux
+  - name: k8s
+    ip: 192.168.0.6
+    mac: 52:54:00:d4:9a:2e
+    device_type: Linux
+    device_role: Linux
+  - name: pinetes
+    ip: 192.168.0.7
+    mac: dc:a6:32:33:8b:eb
+    device_type: Linux
+    device_role: Linux
+  - name: pinetes2
+    ip: 192.168.0.8
+    mac: e6:dd:a3:ad:84:e8
+    device_type: Linux
+    device_role: Linux
+  - name: kms
+    ip: 192.168.0.11
+    mac: 52:54:00:97:64:fb
+    device_type: Linux
+    device_role: Linux
+  - name: k3s
+    ip: 192.168.0.13
+    mac: dc:a6:32:69:9e:94
+    device_type: Linux
+    device_role: Linux
+  - name: kproxy
+    ip: 192.168.0.16
+    mac: 52:54:00:92:be:9f
+    device_type: Linux
+    device_role: Linux
+#  - name: upspig
+#    ip: 192.168.0.8
+#    mac: b8:27:eb:b2:5d:a0
+#    device_type: Linux
+#    device_role: Linux
+  - name: emby
+    ip: 192.168.0.21
+    mac: 52:54:00:3e:d1:da
+    device_type: Linux
+    device_role: Linux
+  - name: bastion
+    ip: 192.168.0.22
+    mac: f6:b1:b0:3a:eb:f4
+    device_type: Linux
+    device_role: Linux
+  - name: gitlab
+    ip: 192.168.0.25
+    mac: 22:a6:f9:4a:d2:93
+    device_type: Linux
+    device_role: Linux
+  - name: laptopw
+    ip: 192.168.0.30
+    mac: 46:bb:c7:40:2b:4f
+    device_type: Linux
+    device_role: Linux
+  - name: laptop
+    ip: 192.168.0.31
+    mac: 00:e0:4c:68:07:67
+    device_type: Linux
+    device_role: Linux
+  - name: laptopp1
+    ip: 192.168.0.32
+    mac: f4:a8:0d:46:39:45
+    device_type: Linux
+    device_role: Linux
+  - name: motioneye
+    ip: 192.168.0.33
+    mac: 52:54:00:a4:14:98
+    device_type: Linux
+    device_role: Linux
+  - name: proxthin
+    ip: 192.168.0.34
+    mac: 7c:d3:0a:22:ae:8a
+    device_type: Linux
+    device_role: Linux
+  - name: proxmox1
+    ip: 192.168.0.35
+    mac: 2c:76:8a:5b:a2:20
+    device_type: Linux
+    device_role: Linux
+  - name: homelab-router
+    ip: 192.168.0.39
+    mac: 36:6c:9f:c8:d3:fb
+    device_type: Linux
+    device_role: Linux
+  - name: testxeon1
+    ip: 192.168.0.40
+    mac: a0:48:1c:b0:8d:e0
+    device_type: Linux
+    device_role: Linux
+  - name: testxeon1-ipmi
+    ip: 192.168.0.41
+    mac: fe:00:00:49:05:c8
+    device_type: Linux
+    device_role: Linux
+  - name: testxeon2
+    ip: 192.168.0.42
+    mac: 2c:59:e5:73:ce:a0
+    device_type: Linux
+    device_role: Linux
+  - name: testxeon2-ipmi
+    ip: 192.168.0.43
+    mac: fe:00:00:49:02:bd
+    device_type: Linux
+    device_role: Linux
+  - name: wg-bastion
+    ip: 192.168.0.74
+    mac: 46:ee:ae:a7:c6:1d
+    device_type: Linux
+    device_role: Linux
+  - name: wgrouter
+    ip: 192.168.0.75
+    mac: 52:54:00:cd:47:58
+    device_type: Linux
+    device_role: Linux
+  - name: rpidebug
+    ip: 192.168.0.201
+    mac:
+    device_type: Linux
+    device_role: Linux
+  - name: proxmox1-ipmi
+    ip: 192.168.0.231
+    mac: 0c:c4:7a:35:d5:4e
+    device_type: Linux
+    device_role: Linux
+- name: GUEST
+  vlan: 3
+  tagged: yes
+  subnet: 192.168.3.0
+  netmask: 255.255.255.0
+  cidr: 24
+  gateway: 192.168.3.1
+  dhcp: &dhcpip3 192.168.3.2
+  dns: *dhcpip3
+  ntp: *dhcpip3
+  range_begin: 192.168.3.100
+  range_end: 192.168.3.149
+  domain: guest.int.jehome.co.uk
+  hosts:
+  - name: dhcp
+    ip: *dhcpip3
+    device_type: Linux
+    device_role: Linux
+  - name: canon
+    mac: f4:a9:97:95:15:e9
+    ip: 192.168.3.98
+    device_role: Printer
+    device_type: Canon Printer
+- name: IOT
+  vlan: 4
+  tagged: yes
+  subnet: 192.168.4.0
+  netmask: 255.255.255.0
+  cidr: 24
+  gateway: 192.168.4.1
+  dhcp: &dhcpip4 192.168.4.2
+  dns: *dhcpip4
+  ntp: *dhcpip4
+  range_begin: 192.168.4.100
+  range_end: 192.168.4.149
+  domain: iot.int.jehome.co.uk
+  hosts:
+  - name: dhcp
+    ip: *dhcpip4
+    device_type: Linux
+    device_role: Linux
+  - name: homeassist
+    ip: 192.168.4.9
+    mac: dc:a6:32:0c:56:01 # old rpi4b
+    # mac ends in 02 for wifi
+    device_type: Linux
+    device_role: Linux
+#  - name: ha
+#    ip: 192.168.4.10
+#    mac: 4a:43:d5:8c:83:2d
+#    #mac: dc:a6:32:1c:bd:a9 # was new rpi4b
+#    device_role: Linux
+#    device_type: Linux
+  - name: ha
+    ip: 192.168.4.10
+    mac: 7c:d3:0a:22:bf:a6
+    device_type: Linux
+    device_role: Linux
+  - name: firetv-bedroom # confirmed
+    mac: 74:a7:ea:1a:65:eb
+    ip: 192.168.4.11
+  - name: denon
+    ip: 192.168.4.12
+    mac: 00:05:cd:98:9e:ee
+  - name: echoshow
+    ip: 192.168.4.13
+    mac: 14:0a:c5:a4:be:79
+  - name: firetv-livingroom
+    ip: 192.168.4.14
+    mac: 4c:17:44:1b:62:14
+  - name: emonpi
+    ip: 192.168.4.15
+    mac: b8:27:eb:fa:96:1a
+    device_type: Linux
+    device_role: Linux
+  - name: nest
+    ip: 192.168.4.16
+    mac: 64:16:66:8f:c6:e1
+  - name: tv-livingroom
+    ip: 192.168.4.17
+    mac: 00:09:df:e5:cb:47
+  - name: splug1
+    ip: 192.168.4.18
+    mac: 50:d4:f7:25:c3:2d
+    device_role: ESP
+    device_type: ESP
+  - name: splug2
+    ip: 192.168.4.19
+    mac: 50:d4:f7:25:c9:ac
+    device_role: ESP
+    device_type: ESP
+  - name: emby
+    ip: 192.168.4.20
+    mac: d2:1b:16:50:6b:25
+    device_type: Linux
+    device_role: Linux
+  - name: reolink-indoor2
+    ip: 192.168.4.21
+    mac: 5c:c3:36:2e:27:25
+    device_type: Reolink Camera
+    device_role: Camera
+  - name: reolink-indoor1
+    ip: 192.168.4.22
+    mac: 68:39:43:20:76:fb
+    device_type: Reolink Camera
+    device_role: Camera
+  - name: reolink-garden
+    ip: 192.168.4.23
+    mac: ec:71:db:aa:10:82
+    device_type: Reolink Camera
+    device_role: Camera
+  - name: reolink-garage
+    ip: 192.168.4.24
+    mac: ec:71:db:ca:c8:4a
+    device_type: Reolink Camera
+    device_role: Camera
+  - name: reolink-front
+    ip: 192.168.4.25
+    mac: ec:71:db:cb:20:89
+    device_type: Reolink Camera
+    device_role: Camera
+  - name: octopi
+    ip: 192.168.4.26
+    mac: b8:27:eb:d4:30:7b
+    device_type: Linux
+    device_role: Linux
+  - name: pwr-dishwasher
+    ip: 192.168.4.27
+    mac: cc:50:e3:d0:64:af
+    device_role: ESP
+    device_type: ESP
+  - name: pwr-washing
+    ip: 192.168.4.28
+    mac: cc:50:e3:d0:66:18
+    device_role: ESP
+    device_type: ESP
+  - name: frigate
+    ip: 192.168.4.30
+    #mac: dc:a6:32:75:aa:11 # was rpi4b
+    mac: ba:cb:db:92:4a:78
+    device_type: Linux
+    device_role: Linux
+- name: HOMELAB
+  vlan: 99
+  tagged: yes
+  subnet: 192.168.99.0
+  netmask: 255.255.255.0
+  cidr: 24
+  gateway: 192.168.99.1
+  enable_dhcp: no
+  enable_bind: no
+  dhcp: &dhcpip99 192.168.99.2
+  dns: *dhcpip99
+  ntp: *dhcpip99
+  range_begin: 192.168.99.100
+  range_end: 192.168.99.149
+  domain: homelab.int.jehome.co.uk
+  hosts:
+  - name: dhcp
+    ip: *dhcpip99
+    device_type: Linux
+    device_role: Linux
+  - name: sat
+    ip: 192.168.99.3
+    device_type: Linux
+    device_role: Linux
+  - name: bastion
+    ip: 192.168.99.20
+    mac: ba:15:9f:a5:90:6a
+    device_type: Linux
+    device_role: Linux
+  - name: mc
+    ip: 192.168.99.21
+    mac: 52:68:ba:1c:55:8d
+    device_type: Linux
+    device_role: Linux

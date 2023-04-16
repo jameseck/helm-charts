@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: {{ include "keadhcp.fullname" . }}
+data:
+  dhcp4.json: |-
+    {"Dhcp4":
+{{- .Values.Dhcp4 | mustToPrettyJson | nindent 6 }}
+    }
