@@ -5,5 +5,5 @@ kind: LinstorSatelliteConfiguration
 metadata:
   name: {{ $pool.name }}
 spec:
-{{ $pool.spec | toYaml }}
+{{ $pool.spec | toYaml | nindent 2 }}
 {{- end }}
