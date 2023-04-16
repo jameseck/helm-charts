@@ -61,6 +61,17 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/adguardhome-0.1.0/adguardhome-0.1.0.tgz
     version: 0.1.0
+  bootstrap:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-04-16T01:05:39.933226234Z"
+    description: A Helm chart for bootstrapping namespaces and more
+    digest: 500ee9498c2f9b1087b8642908cce40ff1729a1443dd034ca8fec811dcab7bcd
+    name: bootstrap
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/bootstrap-0.1.0/bootstrap-0.1.0.tgz
+    version: 0.1.0
   cert-manager-issuers:
   - apiVersion: v2
     appVersion: 1.0.0
@@ -81,6 +92,17 @@ entries:
     type: application
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/cert-manager-issuers-0.1.0/cert-manager-issuers-0.1.0.tgz
+    version: 0.1.0
+  kea-dhcp:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-04-16T01:05:40.100111498Z"
+    description: A chart to deploy kea dhcp
+    digest: c0f89caccd3a81703e6023f543d8732a4cd7ee33d090324365f7083f9790821e
+    name: kea-dhcp
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/kea-dhcp-0.1.0/kea-dhcp-0.1.0.tgz
     version: 0.1.0
   purelb-helper:
   - apiVersion: v2
@@ -115,4 +137,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/test-app-0.1.0/test-app-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-11T21:39:54.051897636Z"
+generated: "2023-04-16T01:05:40.100144998Z"
