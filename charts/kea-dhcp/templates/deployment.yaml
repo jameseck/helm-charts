@@ -27,10 +27,44 @@ spec:
       serviceAccountName: {{ include "keadhcp.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      hostNetwork: false
       containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args: [ "-c", "/kea/config/dhcp4.json" ]
+          ports:
+            - name: dhcp-udp
+              containerPort: 67
+              protocol: UDP
+          readinessProbe:
+            exec:
+              command:
+              - pgrep
+              - kea-dhcp4
+            periodSeconds: 10
+            initialDelaySeconds: 2
+            timeoutSeconds: 5
+          livenessProbe:
+            exec:
+              command:
+              - pgrep
+              - kea-dhcp4
+            periodSeconds: 10
+            initialDelaySeconds: 2
+            timeoutSeconds: 5
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+          - name: config
+            mountPath: /kea/config
+          - name: leases
+            mountPath: /kea/leases
+          - name: sockets
+            mountPath: /kea/sockets
         - name: ctrl-agent
           image: docker.io/jonasal/kea-ctrl-agent:2.3.3-alpine
-          args: [ "-c", "kea/config/config.json" ]
+          args: [ "-c", "/kea/config/config.json" ]
           volumeMounts:
           - name: probe
             mountPath: /probe
@@ -43,6 +77,7 @@ spec:
               command:
               - /usr/bin/python3
               - /probe/probe.py
+            periodSeconds: 10
             initialDelaySeconds: 2
             timeoutSeconds: 5
           livenessProbe:
@@ -50,36 +85,9 @@ spec:
               command:
               - /usr/bin/python3
               - /probe/probe.py
+            periodSeconds: 10
             initialDelaySeconds: 2
             timeoutSeconds: 5
-
-        - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          args: [ "-c", "kea/config/dhcp4.json" ]
-          ports:
-            - name: dhcp-udp
-              containerPort: 67
-              protocol: UDP
-          readinessProbe:
-            exec:
-              command:
-              - pgrep
-              - kea-dhcp4
-          livenessProbe:
-            exec:
-              command:
-              - pgrep
-              - kea-dhcp4
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-          volumeMounts:
-          - name: config
-            mountPath: /kea/config
-          - name: leases
-            mountPath: /kea/leases
-          - name: sockets
-            mountPath: /kea/sockets
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

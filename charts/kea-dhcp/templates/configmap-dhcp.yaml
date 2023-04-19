@@ -2,10 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  creationTimestamp: null
   name: {{ include "keadhcp.fullname" . }}
 data:
   dhcp4.json: |-
-    {"Dhcp4":
-{{- .Values.Dhcp4 | mustToPrettyJson | nindent 6 }}
-    }
+{{- include "keadhcp.dhcp4.yaml" . | fromYaml | mustToPrettyJson | nindent 4 -}}
