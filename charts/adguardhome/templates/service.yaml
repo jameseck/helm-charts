@@ -7,12 +7,12 @@ metadata:
   name: {{ include "adguardhome.fullname" $ }}-{{ $svc }}
 {{- if $v.annotations }}
   annotations:
-{{ $v.annotations | nindent 4 }}
+{{ toYaml $v.annotations | nindent 4 }}
 {{- end }}
   labels:
     {{- include "adguardhome.labels" $ | nindent 4 }}
 {{- if $v.labels }}
-{{ $v.labels | nindent 4 }}
+{{ toYaml $v.labels | nindent 4 }}
 {{- end }}
 spec:
   type: {{ $v.type }}
