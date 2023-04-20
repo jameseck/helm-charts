@@ -3,6 +3,16 @@ entries:
   adguardhome:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-04-20T00:04:32.063508649Z"
+    description: A Helm chart for Kubernetes
+    digest: 6892d2b0c9deed7054beff9c601b7f99e89c5e5ac3fd3464d8a8e7d4dd4f9501
+    name: adguardhome
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/adguardhome-0.2.9/adguardhome-0.2.9.tgz
+    version: 0.2.9
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-04-19T23:59:11.292968325Z"
     description: A Helm chart for Kubernetes
     digest: 7178cbf51cf2c7d28e4f7005b7df597c31b2900948b2f9afe7f2152f390f4c51
@@ -229,4 +239,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/test-app-0.1.0/test-app-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-19T23:59:11.293102127Z"
+generated: "2023-04-20T00:04:32.063553849Z"
