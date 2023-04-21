@@ -1,0 +1,18 @@
+{{- range $k,$v := .Values.persistence }}
+{{- if and $v.enabled (not $v.existingClaim) }}
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+ name: {{ include "keadhcp.fullname" $ }}-{{ $k }}
+ labels:
+   {{- include "keadhcp.labels" $ | nindent 4 }}
+spec:
+ storageClassName: {{ $v.storageClass }}
+ accessModes:
+   - {{ $v.accessMode | quote }}
+ resources:
+   requests:
+     storage: {{ $v.size | quote }}
+ {{- end }}
+{{- end }}
