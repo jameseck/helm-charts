@@ -28,6 +28,14 @@ podAnnotations: {}
 podSecurityContext: {}
   # fsGroup: 2000
 
+persistence:
+  data:
+    storageClass: ""
+    existingClaim: ""
+    enabled: false
+    accessMode: ReadWriteOnce
+    size: 1G
+
 securityContext: {}
   # capabilities:
   #   drop:
