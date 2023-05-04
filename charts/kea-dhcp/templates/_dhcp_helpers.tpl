@@ -10,8 +10,7 @@ subnet4:
     data: {{ $v.gateway }}
   - code: 6
     name: domain-name-servers
-    data:
-    - {{ $v.dns }}
+    data: {{ $v.dns }}
   - code: 15
     name: domain-name
     data: {{ $v.domain }}
