@@ -146,6 +146,16 @@ entries:
   kea-dhcp:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2023-05-04T15:14:39.535976718Z"
+    description: A chart to deploy kea dhcp
+    digest: bda3a9c0682b9dbe7c16ae1d521a9c87a87e9d440f5c46319381c9d1a6192f51
+    name: kea-dhcp
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/kea-dhcp-0.1.3/kea-dhcp-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2023-04-21T06:22:40.843778732Z"
     description: A chart to deploy kea dhcp
     digest: fdd7b5721c006cd960d31d7d7d72340bec62b1714daa55eae25a85e7616014a1
@@ -350,4 +360,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/tftp-0.1.0/tftp-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-04T14:54:53.377473041Z"
+generated: "2023-05-04T15:14:39.536112018Z"
