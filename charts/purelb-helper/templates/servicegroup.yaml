@@ -6,5 +6,17 @@ metadata:
   name: {{ $sg.name }}
   namespace: {{ $sg.namespace }}
 spec:
-{{- $sg.spec | toYaml | nindent 2 }}
+  local:
+    v4pools:
+    {{- range $pool := $sg.v4pools }}
+    - subnet: {{ $pool.subnet }}
+      pool: {{ $pool.pool }}/{{ .pool_cidr | default "32" }}
+      aggregation: {{ $pool.aggregation | default "default" }}
+    {{- end }}
+    v6pools:
+    {{- range $pool := $sg.v6pools }}
+    - subnet: {{ $pool.subnet }}
+      pool: {{ $pool.pool }}/{{ .pool_cidr | default "32" }}
+      aggregation: {{ $pool.aggregation | default "default" }}
+    {{- end }}
 {{- end }}

@@ -2,8 +2,8 @@
 # serviceGroups:
 # - name: default
 #   namespace: purelb
-#   spec:
-#     local:
-#       v4pool:
-#         aggregation: default
-#         ...
+#   v4pools:
+#   - aggregation: default
+#     subnet: 192.168.100.0/24
+#     pool: 192.168.100.1
+#     pool_cidr: 32 # defaults to 32 if not specified
