@@ -88,8 +88,8 @@ dhcp4:
   - name: EFI_x86-64
     test: "option[93].hex == 0x0009"
     boot-file-name: snponly.efi
-  - name: "HTTPClient",
-    test: "option[93].hex == 0x0010",
+  - name: "HTTPClient"
+    test: "option[93].hex == 0x0010"
     option-data: [ { "name": "vendor-class-identifier", "data": "HTTPClient" } ]
     boot-file-name: "http://${httpserver}/ipxe/x86_64/snponly.efi"
   - name: XClient_iPXE
