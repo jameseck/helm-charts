@@ -82,7 +82,7 @@ dhcp4:
     lfc-interval: 3600
   client-classes:
   - name: Legacy_Intel_x86PC
-    test: "option[93].hex == 0x"
+    test: "option[93].hex == 0x0"
 #    boot-file-name: undionly.kpxe
     boot-file-name: netboot.xyz.kpxe
   - name: EFI_x86-64
