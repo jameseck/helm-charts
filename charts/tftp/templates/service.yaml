@@ -2,8 +2,14 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "tftp.fullname" . }}
+{{- if $v.annotations }}
+  annotations:
+{{ toYaml $v.annotations | nindent 4 }}
   labels:
     {{- include "tftp.labels" . | nindent 4 }}
+{{- if $v.labels }}
+{{ toYaml $v.labels | nindent 4 }}
+{{- end }}
 spec:
   type: {{ .Values.service.type }}
   ports:
