@@ -96,7 +96,8 @@ dhcp4:
     boot-file-name: "http://${httpserver}/ipxe/x86_64/snponly.efi"
   - name: XClient_iPXE
     test: "substring(option[77].hex,0,4) == 'iPXE'"
-    boot-file-name: http://${httpserver}/ipxe/boot.php
+#    boot-file-name: http://${httpserver}/ipxe/boot.php
+    boot-file-name: netboot.xyz.kpxe
 
 #  client-classes:
 #  - name: Legacy PXE
