@@ -146,6 +146,16 @@ entries:
   kea-dhcp:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2023-05-04T22:03:36.247073678Z"
+    description: A chart to deploy kea dhcp
+    digest: fc0b909615dda1678414edc17ec942e204874d16e2101e899ce518e3da05cfba
+    name: kea-dhcp
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/kea-dhcp-0.1.7/kea-dhcp-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2023-05-04T15:39:41.102278938Z"
     description: A chart to deploy kea dhcp
     digest: 8c3356c7ea40bc98d9b57c97c8340214e4bbc6578e4f01df5c83d5cec6904403
@@ -256,6 +266,16 @@ entries:
     - https://github.com/jameseck/helm-charts/releases/download/piraeus-config-0.1.0/piraeus-config-0.1.0.tgz
     version: 0.1.0
   purelb-helper:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-05-04T22:03:36.440987514Z"
+    description: A helper chart to deploy purelb crds
+    digest: de6113e1e069d5f25ec19b57a6eec7d9a7cf8d46f479732290e44169d46d00df
+    name: purelb-helper
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/purelb-helper-0.1.1/purelb-helper-0.1.1.tgz
+    version: 0.1.1
   - apiVersion: v2
     appVersion: 1.0.0
     created: "2023-04-11T21:39:54.051870335Z"
@@ -380,4 +400,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/tftp-0.1.0/tftp-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-04T15:39:41.10240774Z"
+generated: "2023-05-04T22:03:36.441094314Z"
