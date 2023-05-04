@@ -81,23 +81,39 @@ dhcp4:
     name: /kea/leases/dhcp4.csv
     lfc-interval: 3600
   client-classes:
-  - name: Legacy PXE
-    boot-file-name: /ipxe/undionly.kpxe
-    #next-server: 0.0.0.0
-    test: "option[client-system].hex == 0x0000"
-  - name: EFI x86_64
-    boot-file-name: /ipxe/netboot.xyz.efi
-    #next-server: 0.0.0.0
-    test: "option[client-system].hex  == 0x0007"
-  - name: iPXE
-    boot-file-name: ""
-    #next-server: 0.0.0.0
+  - name: Legacy_Intel_x86PC
+    test: "option[93].hex == 0x"
+#    boot-file-name: undionly.kpxe
+    boot-file-name: netboot.xyz.kpxe
+  - name: EFI_x86-64
+    test: "option[93].hex == 0x0009"
+    boot-file-name: snponly.efi
+  - name: "HTTPClient",
+    test: "option[93].hex == 0x0010",
+    option-data: [ { "name": "vendor-class-identifier", "data": "HTTPClient" } ]
+    boot-file-name: "http://${httpserver}/ipxe/x86_64/snponly.efi"
+  - name: XClient_iPXE
     test: "substring(option[77].hex,0,4) == 'iPXE'"
-  - name: PXE Host
-    boot-file-name: ""
-    #next-server: 0.0.0.0
-    only-if-required: true
-    option-data: [ ]
-    option-def: [ ]
-    server-hostname: ""
-    test: "member('Legacy PXE') or member('EFI x86_64') or member('iPXE')"
+    boot-file-name: http://${httpserver}/ipxe/boot.php
+
+#  client-classes:
+#  - name: Legacy PXE
+#    boot-file-name: /ipxe/undionly.kpxe
+#    #next-server: 0.0.0.0
+#    test: "option[client-system].hex == 0x0000"
+#  - name: EFI x86_64
+#    boot-file-name: /ipxe/netboot.xyz.efi
+#    #next-server: 0.0.0.0
+#    test: "option[client-system].hex  == 0x0007"
+#  - name: iPXE
+#    boot-file-name: ""
+#    #next-server: 0.0.0.0
+#    test: "substring(option[77].hex,0,4) == 'iPXE'"
+#  - name: PXE Host
+#    boot-file-name: ""
+#    #next-server: 0.0.0.0
+#    only-if-required: true
+#    option-data: [ ]
+#    option-def: [ ]
+#    server-hostname: ""
+#    test: "member('Legacy PXE') or member('EFI x86_64') or member('iPXE')"
