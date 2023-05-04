@@ -3,7 +3,7 @@ subnet4:
 {{- range $k,$v := .Values.vlans -}}
 {{- if (or (not (hasKey $v "enable_dhcp")) (and (hasKey $v "enable_dhcp") ($v.enable_dhcp))) }}
 - subnet: {{ $v.subnet }}/{{ $v.cidr }}
-  next-server: 192.168.50.81
+  next-server: {{ $v.next_server | default $.Values.next_server }}
   option-data:
   - code: 3
     name: routers

@@ -15,8 +15,8 @@ spec:
     metadata:
       {{- with .Values.podAnnotations }}
       annotations:
-        checksum/configmap-config: {{ include (print $.Template.BasePath "/configmap-dhcp.yaml") . | sha256sum }}
-        checksum/configmap-ctrl-agent: {{ include (print $.Template.BasePath "/configmap-ctrl-agent.yaml") . | sha256sum }}
+        checksum/configmap-config: {{ include (print $.Template.BasePath "/configmap-dhcp.yaml") $ | sha256sum }}
+        checksum/configmap-ctrl-agent: {{ include (print $.Template.BasePath "/configmap-ctrl-agent.yaml") $ | sha256sum }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
