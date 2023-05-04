@@ -5,6 +5,7 @@ metadata:
 {{- if .Values.service.annotations }}
   annotations:
 {{ toYaml .Values.service.annotations | nindent 4 }}
+{{- end }}
   labels:
     {{- include "tftp.labels" . | nindent 4 }}
 {{- if .Values.service.labels }}
