@@ -85,7 +85,7 @@ dhcp4:
     boot-file-name: /ipxe/undionly.kpxe
     #next-server: 0.0.0.0
     test: "option[client-system].hex == 0x0000"
-  - name": EFI x86_64
+  - name: EFI x86_64
     boot-file-name: /ipxe/netboot.xyz.efi
     #next-server: 0.0.0.0
     test: "option[client-system].hex  == 0x0007"
