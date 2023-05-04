@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "tftp.fullname" . }}
+  labels:
+    {{- include "tftp.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: tftp
+      protocol: UDP
+      name: tftp
+  selector:
+    {{- include "tftp.selectorLabels" . | nindent 4 }}
