@@ -5,7 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/jameseck/tftp
+  #repository: ghcr.io/jameseck/tftp
+  repository: lscr.io/linuxserver/netbootxyz
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
@@ -29,7 +30,7 @@ podSecurityContext: {}
   # fsGroup: 2000
 
 persistence:
-  data:
+  assets:
     storageClass: ""
     existingClaim: ""
     enabled: false
@@ -44,9 +45,28 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-service:
-  type: LoadBalancer
-  port: 69
+services:
+  http:
+    enabled: true
+    type: ClusterIP
+    ports:
+    - name: http
+      port: 80
+      protocol: TCP
+  tftp:
+    enabled: true
+    type: ClusterIP
+    ports:
+    - name: tftp
+      port: 69
+      protocol: UDP
+  webui:
+    enabled: true
+    type: ClusterIP
+    ports:
+    - name: webui
+      port: 3000
+      protocol: TCP
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

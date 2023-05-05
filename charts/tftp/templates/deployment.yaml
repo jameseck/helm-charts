@@ -34,24 +34,30 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: tftp
-              containerPort: {{ .Values.service.port }}
-              protocol: UDP
+          {{- range $svc, $v := .Values.services }}
+          {{- range $port := $v.ports }}
+          - name: {{ $svc }}
+            containerPort: {{ $port.containerPort | default $port.port }}
+            protocol: {{ $port.protocol }}
+          {{- end }}
+          {{- end }}
           livenessProbe:
-            exec:
-              command:
-              - pgrep
-              - tftp
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 2
+            timeoutSeconds: 5
           readinessProbe:
-            exec:
-              command:
-              - pgrep
-              - tftp
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 2
+            timeoutSeconds: 5
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-          - name: data
-            mountPath: /var/tftpboot
+          - name: assets
+            mountPath: /assets
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -65,10 +71,10 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
-      - name: data
-        {{- if .Values.persistence.data.enabled }}
+      - name: assets
+        {{- if .Values.persistence.assets.enabled }}
         persistentVolumeClaim:
-          claimName: {{ .Values.persistence.data.existingClaim | default (print (include "tftp.fullname" $) "-data") }}
+          claimName: {{ .Values.persistence.assets.existingClaim | default (print (include "tftp.fullname" $) "-assets") }}
         {{- else }}
         emptyDir: {}
         {{- end }}
