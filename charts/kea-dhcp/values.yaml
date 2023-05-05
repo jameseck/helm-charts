@@ -73,7 +73,7 @@ dhcp4:
     - output: stdout
       pattern: "%D{%Y-%m-%d %H:%M:%S.%q} %-5p [%c/%i.%t] %m\n"
   - name: kea-dhcp4.commands
-    seerity: WARN
+    severity: WARN
     output_options:
     - output: stdout
       pattern: "%D{%Y-%m-%d %H:%M:%S.%q} %-5p [%c/%i.%t] %m\n"
