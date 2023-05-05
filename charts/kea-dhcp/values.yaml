@@ -72,6 +72,11 @@ dhcp4:
     output_options:
     - output: stdout
       pattern: "%D{%Y-%m-%d %H:%M:%S.%q} %-5p [%c/%i.%t] %m\n"
+  - name: kea-dhcp4.commands
+    seerity: WARN
+    output_options:
+    - output: stdout
+      pattern: "%D{%Y-%m-%d %H:%M:%S.%q} %-5p [%c/%i.%t] %m\n"
   control-socket:
     socket-type: unix
     socket-name: /kea/sockets/dhcp4.socket
@@ -83,7 +88,6 @@ dhcp4:
   client-classes:
   - name: Legacy_Intel_x86PC
     test: "option[93].hex == 0x0"
-#    boot-file-name: undionly.kpxe
     boot-file-name: netboot.xyz.kpxe
   - name: EFI_x86-64
     test: "option[93].hex == 0x0009"
@@ -96,7 +100,6 @@ dhcp4:
     boot-file-name: "http://${httpserver}/ipxe/x86_64/snponly.efi"
   - name: XClient_iPXE
     test: "substring(option[77].hex,0,4) == 'iPXE'"
-#    boot-file-name: http://${httpserver}/ipxe/boot.php
     boot-file-name: netboot.xyz.kpxe
 
 #  client-classes:
