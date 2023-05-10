@@ -1,0 +1,6 @@
+apiVersion: v2
+name: rook-ceph-helper
+description: A Helm chart to assist creating ceph clusters with rook
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

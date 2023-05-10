@@ -1,0 +1,9 @@
+{{- range $cc := .Values.ceph_cluster }}
+apiVersion: ceph.rook.io/v1
+kind: CephCluster
+metadata:
+  name: {{ $cc.name }}
+  namespace: {{ $cc.namespace }}
+spec:
+{{- $cc.spec | toYaml | nindent 2 }}
+{{ end }}
