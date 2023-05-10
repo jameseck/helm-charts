@@ -1,0 +1,6 @@
+apiVersion: v2
+name: rook-ceph-ingress
+description: A Helm chart to create an ingress resource for the rook ceph dashboard
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
