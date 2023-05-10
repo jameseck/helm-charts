@@ -1,26 +1,25 @@
-{{- range $svc,$v := .Values.services }}
-{{- if $v.enabled }}
+{{- if .Values.service.enabled }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "tftp.fullname" $ }}-{{ $svc }}
-{{- if $v.annotations }}
+{{- if .Values.service.annotations }}
   annotations:
-{{ toYaml $v.annotations | nindent 4 }}
+{{ toYaml .Values.service.annotations | nindent 4 }}
 {{- end }}
   labels:
     {{- include "tftp.labels" $ | nindent 4 }}
-{{- if $v.labels }}
-{{ toYaml $v.labels | nindent 4 }}
+{{- if .Values.service.labels }}
+{{ toYaml .Values.service.labels | nindent 4 }}
 {{- end }}
 spec:
-  type: {{ $v.type }}
-{{- if $v.loadBalancerIP }}
-  loadBalancerIP: {{ $v.loadBalancerIP }}
+  type: {{ .Values.service.type }}
+{{- if .Values.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.service.loadBalancerIP }}
 {{- end }}
   ports:
-  {{- toYaml $v.ports | nindent 4 }}
+  {{- toYaml .Values.service.ports | nindent 4 }}
   selector:
     {{- include "tftp.selectorLabels" $ | nindent 4 }}
 {{- end }}
