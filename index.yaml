@@ -398,6 +398,17 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/rook-ceph-helper-0.1.0/rook-ceph-helper-0.1.0.tgz
     version: 0.1.0
+  rook-ceph-ingress:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-05-10T23:15:25.121643377Z"
+    description: A Helm chart to create an ingress resource for the rook ceph dashboard
+    digest: 28fdfacbdc590647ab0bcd06801018b2884c8e41186420feea84ef012fb794c6
+    name: rook-ceph-ingress
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/rook-ceph-ingress-0.1.0/rook-ceph-ingress-0.1.0.tgz
+    version: 0.1.0
   sealed-secrets:
   - apiVersion: v2
     appVersion: 1.0.0
@@ -562,4 +573,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/tftp-0.1.0/tftp-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-10T22:51:52.382413261Z"
+generated: "2023-05-10T23:15:25.121744884Z"
