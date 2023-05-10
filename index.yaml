@@ -387,6 +387,17 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/purelb-helper-0.1.0/purelb-helper-0.1.0.tgz
     version: 0.1.0
+  rook-ceph-helper:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-05-10T22:51:52.382244058Z"
+    description: A Helm chart to assist creating ceph clusters with rook
+    digest: dd784e00051092f63fc322479e5348837e2e526dd6a0d31afef5bbc9cedc7a74
+    name: rook-ceph-helper
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/rook-ceph-helper-0.1.0/rook-ceph-helper-0.1.0.tgz
+    version: 0.1.0
   sealed-secrets:
   - apiVersion: v2
     appVersion: 1.0.0
@@ -551,4 +562,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/tftp-0.1.0/tftp-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-10T22:41:56.951461023Z"
+generated: "2023-05-10T22:51:52.382413261Z"
