@@ -3,6 +3,16 @@ entries:
   adguardhome:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-05-10T21:57:23.239088544Z"
+    description: A Helm chart for Kubernetes
+    digest: ae8aca442d2bcb3b9b74e699031fc1d4d6c83612b2b9cab3052c8bbdcba44cbe
+    name: adguardhome
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/adguardhome-0.4.0/adguardhome-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-04-21T06:23:41.865741377Z"
     description: A Helm chart for Kubernetes
     digest: b36d9a853525ea42ec1af5a5b12bcbd475521d4b9ea4ffcc22edbd29b663dd97
@@ -112,6 +122,16 @@ entries:
     - https://github.com/jameseck/helm-charts/releases/download/adguardhome-0.1.0/adguardhome-0.1.0.tgz
     version: 0.1.0
   bind9:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-05-10T21:57:23.384429584Z"
+    description: A Helm chart for authoritative bind9
+    digest: 392a620cd759a94bde02eb74fa1c230d2e895b3720255b30fa25f299aed3fca4
+    name: bind9
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/bind9-0.1.1/bind9-0.1.1.tgz
+    version: 0.1.1
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2023-05-10T13:23:43.027564296Z"
@@ -403,6 +423,16 @@ entries:
   tftp:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2023-05-10T21:57:23.518435121Z"
+    description: A Helm chart for tftp
+    digest: 2af40e04e6545886383ef52e027570b769217f520998df92415b64fcf66d96e7
+    name: tftp
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/tftp-0.1.9/tftp-0.1.9.tgz
+    version: 0.1.9
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2023-05-05T23:09:03.012828414Z"
     description: A Helm chart for tftp
     digest: e382f12d2098e5ce8aeb91bc9d8361621917710b7f85e3ee964086035afc2f63
@@ -491,4 +521,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/tftp-0.1.0/tftp-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-10T13:23:43.174231053Z"
+generated: "2023-05-10T21:57:23.518536621Z"
