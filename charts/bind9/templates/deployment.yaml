@@ -1,0 +1,112 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "bind9.fullname" . }}
+  labels:
+    {{- include "bind9.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "bind9.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/configmap-config: {{ include (print $.Template.BasePath "/configmap-config.yaml") . | sha256sum }}
+        checksum/configmap-zones: {{ include (print $.Template.BasePath "/configmap-zones.yaml") . | sha256sum }}
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "bind9.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "bind9.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: rndc
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          command:
+          - sh
+          - -c
+          - |
+            rndc-confgen -a -c /etc/rndc/rndc.key -k rndc-key
+            cat <<EOF > /etc/rndc/rndc.conf
+            options {
+            	default-key "rndc-key";
+            	default-server 127.0.0.1;
+            	default-port 953;
+            };
+
+            server 127.0.0.1 {
+              key         rndc-key;
+              addresses   { 127.0.0.1 port 953; };
+            };
+            EOF
+            cat /etc/rndc/rndc.key >> /etc/rndc/rndc.conf
+            chown 104:105 -R /etc/rndc
+
+          volumeMounts:
+          - name: rndc
+            mountPath: /etc/rndc
+      containers:
+        - name: {{ .Chart.Name }}
+          command:
+          - /usr/sbin/named
+          - -g
+          - -c
+          - /etc/bind/named.conf
+          - -u
+          - bind
+          #command: ['sh']
+          #args: [ '-c', 'sleep 6000s']
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            {{- range $port := .Values.service.ports }}
+            - name: {{ $port.name }}
+              containerPort: {{ $port.targetPort }}
+              protocol: {{ $port.protocol }}
+            {{- end }}
+          livenessProbe:
+            tcpSocket:
+              port: dns-tcp
+          readinessProbe:
+            tcpSocket:
+              port: dns-tcp
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+          - name: config
+            mountPath: /etc/bind
+          - name: rndc
+            mountPath: /etc/rndc
+          - name: zones
+            mountPath: /var/cache/zones
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+      - name: config
+        configMap:
+          name: {{ include "bind9.fullname" . }}-config
+      - name: zones
+        configMap:
+          name: {{ include "bind9.fullname" . }}-zones
+      - name: rndc
+        emptyDir: {}

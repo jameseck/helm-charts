@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "bind9.fullname" . }}-test-connection"
+  labels:
+    {{- include "bind9.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: docker.io/toolbelt/dig
+      command:
+      - /bin/sh
+      - -c
+      - |
+        trap 'exit 0' 9 15
+        for i in $(seq 1 5); do
+          dig @{{ include "bind9.fullname" . }} {{ .Values.dns_test_record }} | grep "status: NOERROR" && s=0 && break || s=$? && sleep 5
+        done
+        (exit $s)
+  restartPolicy: Never

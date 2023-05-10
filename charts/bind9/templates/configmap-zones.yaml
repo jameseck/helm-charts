@@ -1,0 +1,89 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "bind9.fullname" . }}-zones
+data:
+{{- range $k,$v := .Values.vlans }}
+{{- if (or (not (hasKey $v "enable_bind")) (and (hasKey $v "enable_bind") ($v.enable_bind))) }}
+  {{ $v.domain }}: |
+    $ORIGIN {{ $v.domain }}.
+    $TTL {{ $v.ttl | default "1W" }}
+    @ IN SOA ns1.{{ $v.domain }}. admin.{{ $v.domain }}. (
+      {{ now | date "2006010205" }}
+      1D
+      1H
+      1W
+      1D )
+                             IN NS       ns1.{{ $v.domain }}.
+
+    ns1                      IN A        {{ $v.dns }}
+    {{- range $host := $v.hosts }}
+    {{- if $host.ip }}
+    {{ printf "%-24s" $host.name }} IN A        {{ $host.ip }}
+    {{- end }}
+    {{- end }}
+{{- end }}
+{{- end }}
+{{- range $v := .Values.vlans }}
+{{- if (or (not (hasKey $v "enable_bind")) (and (hasKey $v "enable_bind") ($v.enable_bind))) }}
+{{- $net := splitList "." $v.subnet | reverse }}
+  {{ slice $net 1 4 | join "." }}.in-addr.arpa: |
+    $ORIGIN {{ slice $net 1 4 | join "." }}.in-addr.arpa.
+    $TTL {{ $v.ttl | default "1W" }}
+    @ IN SOA ns1.{{ $v.domain }}. admin.{{ $v.domain }}. (
+      {{ now | date "2006010205" }}
+      1D
+      1H
+      1W
+      1D )
+
+                             IN NS         ns1.{{ $v.domain }}.
+    {{ range $host := $v.hosts }}
+    {{- if $host.ip }}
+    {{- $tempip := splitList "." $host.ip }}
+    {{- $tempip2 := index $tempip 3 }}
+    {{ printf "%-24s" $tempip2 }} IN PTR        {{ $host.name }}.{{ $v.domain }}.
+    {{- end }}
+    {{- end }}
+{{- end }}
+{{- end }}
+{{- range $v := .Values.bind_zones_extra -}}
+{{- if ne $v.type "forward" }}
+  {{ $v.name }}: |
+    $ORIGIN {{ $v.name }}.
+    $TTL {{ $v.ttl | default "1W" }}
+    @ IN SOA ns1.{{ $v.name }}. admin.{{ $v.name }}. (
+      {{ now | date "2006010205" }}
+      1D
+      1H
+      1W
+      1D )
+                             IN NS       ns1.{{ $v.name }}.
+
+    ns1                      IN A        {{ $v.dns }}
+    {{- range $host := $v.hosts }}
+    {{- if $host.ip }}
+    {{ printf "%-24s" $host.name }} IN A        {{ $host.ip }}
+    {{- end }}
+    {{- end }}
+{{- end }}
+{{- end }}
+{{- range $v := .Values.bind_response_policy_zones }}
+  {{ $v.name }}: |
+    $TTL {{ $v.ttl | default "1W" }}
+    @ IN SOA localhost.{{ $v.name }}. admin.{{ $v.name }}. (
+      {{ now | date "2006010205" }}
+      1D
+      1H
+      1W
+      1D )
+                             IN NS       localhost.{{ $v.name }}.
+
+    localhost                IN A        127.0.0.1
+    {{- range $host := $v.hosts }}
+    {{- if $host.ip }}
+    {{ printf "%-24s" $host.name }} IN A        {{ $host.ip }}
+    {{- end }}
+    {{- end }}
+{{ end }}

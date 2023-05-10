@@ -1,0 +1,94 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "bind9.fullname" . }}-config
+data:
+  named.conf: |
+    acl "good-guys" {
+{{- if .Values.aclAllowedNetworks }}
+{{- range .Values.aclAllowedNetworks }}
+      {{ . }};
+{{- end }}
+{{- end }}
+      localnets;
+      localhost;
+    };
+
+    include "/etc/rndc/rndc.key";
+    controls {
+      inet 127.0.0.1 allow { localhost; } keys { "rndc-key"; };
+    };
+
+    options {
+      listen-on port 53 { any; };
+      directory   "/var/cache/bind";
+      dump-file   "/var/cache/bind/data/cache_dump.db";
+      statistics-file "/var/cache/bind/data/named_stats.txt";
+      memstatistics-file "/var/cache/bind/data/named_mem_stats.txt";
+      allow-query { any; };
+
+      recursion yes;
+      allow-recursion { "good-guys"; };
+      allow-query-cache { "good-guys"; };
+      #forward only;
+      forwarders {
+      {{ range .Values.forwarders }}
+        {{ . }};
+      {{- end }}
+      };
+
+      {{- if .Values.bind_response_policy_zones }}
+      response-policy {
+        {{- range $v := .Values.bind_response_policy_zones }}
+        zone "{{ $v.name }}";
+        {{- end }}
+      };
+      {{- end }}
+
+      rrset-order { order random; };
+    };
+
+{{ range $v := .Values.vlans }}
+{{- if (or (not (hasKey $v "enable_bind")) (and (hasKey $v "enable_bind") ($v.enable_bind))) }}
+{{- $net := splitList "." $v.subnet | reverse }}
+    zone "{{ $v.domain }}" IN {
+      type master;
+      file "/var/cache/zones/{{ $v.domain }}";
+      notify yes;
+      allow-update { none; };
+    };
+    zone "{{ slice $net 1 4 | join "." }}.in-addr.arpa" IN {
+      type master;
+      file "/var/cache/zones/{{ slice $net 1 4 | join "." }}.in-addr.arpa";
+      notify yes;
+      allow-update { none; };
+    };
+{{- end }}
+{{- end }}
+{{- range $v := .Values.bind_zones_extra }}
+    zone "{{ $v.name }}" IN {
+    {{- if eq $v.type "forward" }}
+      type forward;
+      forward only;
+      forwarders {
+      {{- range $v.forwarders }}
+        {{ . }};
+      {{- end }}
+      };
+    {{- else }}
+      type master;
+      file "/var/cache/zones/{{ $v.name }}";
+      notify yes;
+      allow-update { none; };
+    {{- end }}
+    };
+{{- end }}
+{{- range $v := .Values.bind_response_policy_zones }}
+    zone "{{ $v.name }}" IN {
+      type master;
+      file "/var/cache/zones/{{ $v.name }}";
+      notify yes;
+      allow-update { none; };
+    };
+{{ end }}
