@@ -16,6 +16,9 @@ metadata:
 {{- end }}
 spec:
   type: {{ $v.type }}
+{{- if $v.loadBalancerIP }}
+  loadBalancerIP: {{ $v.loadBalancerIP }}
+{{- end }}
   ports:
   {{- toYaml $v.ports | nindent 4 }}
   selector:
