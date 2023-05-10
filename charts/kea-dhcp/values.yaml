@@ -57,6 +57,7 @@ tolerations: []
 affinity: {}
 
 next_server: 0.0.0.0
+http_server: 192.168.0.55
 
 dhcp4:
   interfaces-config:
@@ -85,41 +86,22 @@ dhcp4:
     persist: true
     name: /kea/leases/dhcp4.csv
     lfc-interval: 3600
-  client-classes:
-  - name: Legacy_Intel_x86PC
-    test: "option[93].hex == 0x0"
-    boot-file-name: netboot.xyz.kpxe
-  - name: EFI_x86-64
-    test: "option[93].hex == 0x0009"
-    boot-file-name: snponly.efi
-  - name: "HTTPClient"
-    test: "option[93].hex == 0x0010"
-    option-data:
-    - name: vendor-class-identifier
-      data: HTTPClient
-    boot-file-name: "http://${httpserver}/ipxe/x86_64/snponly.efi"
-  - name: XClient_iPXE
-    test: "substring(option[77].hex,0,4) == 'iPXE'"
-    boot-file-name: netboot.xyz.kpxe
-
 #  client-classes:
-#  - name: Legacy PXE
-#    boot-file-name: /ipxe/undionly.kpxe
-#    #next-server: 0.0.0.0
-#    test: "option[client-system].hex == 0x0000"
-#  - name: EFI x86_64
-#    boot-file-name: /ipxe/netboot.xyz.efi
-#    #next-server: 0.0.0.0
-#    test: "option[client-system].hex  == 0x0007"
-#  - name: iPXE
-#    boot-file-name: ""
-#    #next-server: 0.0.0.0
+#  - name: Legacy_Intel_x86PC
+#    test: "option[93].hex == 0x0"
+#    boot-file-name: netboot.xyz.kpxe
+#  - name: EFI_x86-64_1
+#    test: "option[93].hex == 0x0007"
+#    boot-file-name: netboot.xyz.efi
+#  - name: EFI_x86-64_2
+#    test: "option[93].hex == 0x0009"
+#    boot-file-name: netboot.xyz.efi
+#  - name: "HTTPClient"
+#    test: "option[93].hex == 0x0010"
+#    option-data:
+#    - name: vendor-class-identifier
+#      data: HTTPClient
+#    boot-file-name: "http://192.168.0.55/netboot.xyz.efi"
+#  - name: XClient_iPXE
 #    test: "substring(option[77].hex,0,4) == 'iPXE'"
-#  - name: PXE Host
-#    boot-file-name: ""
-#    #next-server: 0.0.0.0
-#    only-if-required: true
-#    option-data: [ ]
-#    option-def: [ ]
-#    server-hostname: ""
-#    test: "member('Legacy PXE') or member('EFI x86_64') or member('iPXE')"
+#    boot-file-name: netboot.xyz.kpxe
