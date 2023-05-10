@@ -111,6 +111,17 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/adguardhome-0.1.0/adguardhome-0.1.0.tgz
     version: 0.1.0
+  bind9:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-05-10T13:23:43.027564296Z"
+    description: A Helm chart for authoritative bind9
+    digest: d4594a0c1f80b346bdcfd9303507241970727dd14e9dfc09a73e1f10bf569fe8
+    name: bind9
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/bind9-0.1.0/bind9-0.1.0.tgz
+    version: 0.1.0
   bootstrap:
   - apiVersion: v2
     appVersion: 1.0.0
@@ -144,6 +155,16 @@ entries:
     - https://github.com/jameseck/helm-charts/releases/download/cert-manager-issuers-0.1.0/cert-manager-issuers-0.1.0.tgz
     version: 0.1.0
   kea-dhcp:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-05-10T13:23:43.174006952Z"
+    description: A chart to deploy kea dhcp
+    digest: 43623977b76b6f0408b0f34c592bf305ebd241c3d41d6f64cca1bffae7b535b2
+    name: kea-dhcp
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/kea-dhcp-0.1.14/kea-dhcp-0.1.14.tgz
+    version: 0.1.14
   - apiVersion: v2
     appVersion: 1.0.0
     created: "2023-05-05T23:35:31.62529498Z"
@@ -470,4 +491,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/tftp-0.1.0/tftp-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-05T23:35:31.625463879Z"
+generated: "2023-05-10T13:23:43.174231053Z"
