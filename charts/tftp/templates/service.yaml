@@ -23,4 +23,3 @@ spec:
   selector:
     {{- include "tftp.selectorLabels" $ | nindent 4 }}
 {{- end }}
-{{- end }}
