@@ -37,10 +37,10 @@ persistence:
     accessMode: ReadWriteOnce
     size: 1G
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
+securityContext:
+  capabilities:
+    add:
+    - SYS_CHROOT
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
