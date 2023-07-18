@@ -57,7 +57,7 @@ tolerations: []
 affinity: {}
 
 next_server: 0.0.0.0
-http_server: 192.168.0.55
+http_server: 0.0.0.0
 
 dhcp4:
   interfaces-config:
