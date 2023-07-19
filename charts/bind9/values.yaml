@@ -33,6 +33,7 @@ securityContext:
   runAsNonRoot: false
   #runAsUser: 104
 
+# If services: [] is defined, service: [] is ignored
 service:
   type: LoadBalancer
   ports:

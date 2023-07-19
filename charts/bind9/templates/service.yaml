@@ -1,3 +1,4 @@
+{{- if not .Values.services }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -20,3 +21,4 @@ spec:
   {{- .Values.service.ports | toYaml | nindent 4 }}
   selector:
     {{- include "bind9.selectorLabels" . | nindent 4 }}
+{{- end }}

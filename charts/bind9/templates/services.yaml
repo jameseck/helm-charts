@@ -1,0 +1,25 @@
+{{- range $svc := .Values.services }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "bind9.fullname" $ }}-{{ $svc.name }}
+{{- if $svc.annotations }}
+  annotations:
+{{ toYaml $svc.annotations | nindent 4 }}
+{{- end }}
+  labels:
+    {{- include "bind9.labels" $ | nindent 4 }}
+{{- if $svc.labels }}
+{{ toYaml $svc.labels | nindent 4 }}
+{{- end }}
+spec:
+  type: {{ $svc.type }}
+{{- if $svc.loadBalancerIP }}
+  loadBalancerIP: {{ $svc.loadBalancerIP }}
+{{- end }}
+  ports:
+  {{- $svc.ports | toYaml | nindent 4 }}
+  selector:
+    {{- include "bind9.selectorLabels" $ | nindent 4 }}
+{{- end }}
