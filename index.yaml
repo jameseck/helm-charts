@@ -124,6 +124,16 @@ entries:
   bind9:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-07-19T11:59:46.249702886Z"
+    description: A Helm chart for authoritative bind9
+    digest: fd1592fbfd5bdeda361b702e4cb7cc0ef044db56bfcf8785675518e3c169f73d
+    name: bind9
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/bind9-0.1.2/bind9-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-05-10T21:57:23.384429584Z"
     description: A Helm chart for authoritative bind9
     digest: 392a620cd759a94bde02eb74fa1c230d2e895b3720255b30fa25f299aed3fca4
@@ -593,4 +603,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/tftp-0.1.0/tftp-0.1.0.tgz
     version: 0.1.0
-generated: "2023-07-18T14:34:23.425080672Z"
+generated: "2023-07-19T11:59:46.249842288Z"
