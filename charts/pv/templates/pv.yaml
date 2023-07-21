@@ -1,11 +1,18 @@
-{{- range $k,$v := .Values.volumes }}
+{{- range $v := .Values.volumes }}
 ---
 kind: PersistentVolume
 apiVersion: v1
 metadata:
- name: {{ $k }}
- labels:
+  name: {{ $v.name }}
+{{- if $v.annotations }}
+  annotations:
+{{ toYaml $v.annotations | nindent 4 }}
+{{- end }}
+  labels:
    {{- include "pv.labels" $ | nindent 4 }}
+{{- if $v.labels }}
+{{ toYaml $v.labels | nindent 4 }}
+{{- end }}
 spec:
 {{- toYaml $v.spec | nindent 2 }}
 {{- end }}
