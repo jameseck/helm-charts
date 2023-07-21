@@ -410,6 +410,16 @@ entries:
   pv:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2023-07-21T12:25:31.566757236Z"
+    description: A Helm chart to define persistent volumes
+    digest: 3b80aad0bdeebcf9cd35332a79361331a86db457dc7b35f6bd11362511467220
+    name: pv
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/pv-0.1.1/pv-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2023-07-21T12:21:56.858732012Z"
     description: A Helm chart to define persistent volumes
     digest: d99a443f1ccb368e3f87621c7f9a8f97975184af59fa5da8a857e06401570f08
@@ -614,4 +624,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/tftp-0.1.0/tftp-0.1.0.tgz
     version: 0.1.0
-generated: "2023-07-21T12:21:56.858824013Z"
+generated: "2023-07-21T12:25:31.566915437Z"
