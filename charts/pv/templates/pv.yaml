@@ -3,7 +3,7 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
- name: {{ include "pv.fullname" $ }}-{{ $k }}
+ name: {{ $k }}
  labels:
    {{- include "pv.labels" $ | nindent 4 }}
 spec:
