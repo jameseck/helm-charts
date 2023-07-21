@@ -407,6 +407,17 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/purelb-helper-0.1.0/purelb-helper-0.1.0.tgz
     version: 0.1.0
+  pv:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-07-21T12:21:56.858732012Z"
+    description: A Helm chart to define persistent volumes
+    digest: d99a443f1ccb368e3f87621c7f9a8f97975184af59fa5da8a857e06401570f08
+    name: pv
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/pv-0.1.0/pv-0.1.0.tgz
+    version: 0.1.0
   rook-ceph-helper:
   - apiVersion: v2
     appVersion: 1.0.0
@@ -603,4 +614,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/tftp-0.1.0/tftp-0.1.0.tgz
     version: 0.1.0
-generated: "2023-07-19T11:59:46.249842288Z"
+generated: "2023-07-21T12:21:56.858824013Z"
