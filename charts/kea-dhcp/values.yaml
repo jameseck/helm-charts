@@ -31,9 +31,6 @@ podSecurityContext:
   fsGroup: 2000
   runAsNonRoot: false
   runAsUser: 0
-  capabilities:
-    add:
-      - NET_ADMIN
   # capabilities:
   #   drop:
   #   - ALL

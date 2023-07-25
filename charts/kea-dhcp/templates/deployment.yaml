@@ -57,6 +57,10 @@ spec:
             timeoutSeconds: 5
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          securityContext:
+            capabilities:
+              add:
+              - NET_ADMIN
           volumeMounts:
           - name: config
             mountPath: /kea/config
