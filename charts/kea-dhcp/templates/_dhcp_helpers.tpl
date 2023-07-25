@@ -33,25 +33,6 @@ subnet4:
     ip-address: {{ $host.ip }}
   {{- end }}
   {{- end }}
-  client-classes:
-  - name: Legacy_Intel_x86PC
-    test: "option[93].hex == 0x0"
-    boot-file-name: netboot.xyz.kpxe
-  - name: EFI_x86-64_1
-    test: "option[93].hex == 0x0007"
-    boot-file-name: netboot.xyz.efi
-  - name: EFI_x86-64_2
-    test: "option[93].hex == 0x0009"
-    boot-file-name: netboot.xyz.efi
-  - name: "HTTPClient"
-    test: "option[93].hex == 0x0010"
-    boot-file-name: "http://{{ $v.http_server | default $.Values.http_server }}/netboot.xyz.efi"
-    option-data:
-    - name: vendor-class-identifier
-      data: HTTPClient
-  - name: XClient_iPXE
-    test: "substring(option[77].hex,0,4) == 'iPXE'"
-    boot-file-name: netboot.xyz.kpxe
 {{- end }}
 {{- end }}
 {{- end }}
@@ -71,9 +52,9 @@ Dhcp4:
   - name: EFI_x86-64_2
     test: "option[93].hex == 0x0009"
     boot-file-name: netboot.xyz.efi
-  - name: "HTTPClient"
+  - name: HTTPClient
     test: "option[93].hex == 0x0010"
-    boot-file-name: "http://{{ .Values.http_server }}/netboot.xyz.efi"
+    boot-file-name: "http://{{ $.Values.http_server }}/netboot.xyz.efi"
     option-data:
     - name: vendor-class-identifier
       data: HTTPClient

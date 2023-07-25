@@ -7,6 +7,11 @@ image:
   pullPolicy: IfNotPresent
   tag: 2.3.3-alpine
 
+ctrl_agent_image:
+  repository: docker.io/jonasal/kea-ctrl-agent
+  pullPolicy: IfNotPresent
+  tag: 2.3.3-alpine
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -57,7 +62,7 @@ tolerations: []
 affinity: {}
 
 next_server: 0.0.0.0
-http_server: 0.0.0.0
+http_server: boot.netboot.xyz/ipxe
 
 dhcp4:
   interfaces-config:
