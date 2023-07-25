@@ -96,8 +96,18 @@ spec:
             timeoutSeconds: 5
         - name: config-reloader
           # Run inotifyd to send config-reload command to ctrl-agent
-          image: "{{ .Values.ctrl_agent_image.repository }}:{{ .Values.ctrl_agent_image.tag | default .Chart.AppVersion }}"
-          args: [ "-c", "/kea/config/config.json" ]
+          image: "{{ .Values.config_reloader_image.repository }}:{{ .Values.config_reloader_image.tag | default .Chart.AppVersion }}"
+          command:
+          - /bin/sh
+          - -c
+          - |
+            inotifyd - /kea/config/dhcp4.json | while read a b x; do
+              if [ "$a" == "w" ]; then
+                echo "`date`: config file changed - triggering reload"
+                wget --header="Content-Type: application/json" --post-data='{ "command": "config-reload", "service": [ "dhcp4" ] }' --output-document - http://localhost:8000
+              fi
+            done
+          #args: [ "-c", "/kea/config/config.json" ]
           volumeMounts:
           - name: config
             mountPath: /kea/config
