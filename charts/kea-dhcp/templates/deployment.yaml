@@ -101,13 +101,14 @@ spec:
           - /bin/sh
           - -c
           - |
-            inotifyd - /kea/config/dhcp4.json | while read a b x; do
-              if [ "$a" == "w" ]; then
-                echo "`date`: config file changed - triggering reload"
-                wget --header="Content-Type: application/json" --post-data='{ "command": "config-reload", "service": [ "dhcp4" ] }' --output-document - http://localhost:8000
-              fi
+            while true; do
+              inotifyd - /kea/config/dhcp4.json | while read a b x; do
+                if [ "${a}" == "w" ]; then
+                  echo `date`: config file changed - triggering reload
+                  wget --header='Content-Type: application/json' --post-data='{ "command": "config-reload", "service": [ "dhcp4" ] }' --output-document - http://localhost:8000
+                fi
+              done
             done
-          #args: [ "-c", "/kea/config/config.json" ]
           volumeMounts:
           - name: config
             mountPath: /kea/config
