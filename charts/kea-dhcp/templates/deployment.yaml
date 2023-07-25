@@ -94,19 +94,6 @@ spec:
             periodSeconds: 10
             initialDelaySeconds: 2
             timeoutSeconds: 5
-        - name: config-reloader
-          # Run inotifyd to send config-reload command to ctrl-agent
-          image: "{{ .Values.config_reloader_image.repository }}:{{ .Values.config_reloader_image.tag | default .Chart.AppVersion }}"
-          command:
-          - inotifyd
-          args:
-          - /reloader/reloader.sh
-          - /kea/config/dhcp4.json
-          volumeMounts:
-          - name: reloader
-            mountPath: /reloader
-          - name: config
-            mountPath: /kea/config
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -123,10 +110,6 @@ spec:
       - name: config
         configMap:
           name: {{ include "keadhcp.fullname" . }}
-          defaultMode: 0755
-      - name: reloader
-        configMap:
-          name: {{ include "keadhcp.fullname" . }}-reloader
       - name: leases
         {{- if .Values.persistence.leases.enabled }}
         persistentVolumeClaim:

@@ -12,11 +12,6 @@ ctrl_agent_image:
   pullPolicy: IfNotPresent
   tag: 2.3.3-alpine
 
-config_reloader_image:
-  repository: docker.io/library/alpine
-  pullPolicy: IfNotPresent
-  tag: 3
-
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
