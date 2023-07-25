@@ -65,7 +65,7 @@ spec:
           - name: sockets
             mountPath: /kea/sockets
         - name: ctrl-agent
-          image: docker.io/jonasal/kea-ctrl-agent:2.3.3-alpine
+          image: "{{ .Values.ctrl_agent_image.repository }}:{{ .Values.ctrl_agent_image.tag | default .Chart.AppVersion }}"
           args: [ "-c", "/kea/config/config.json" ]
           volumeMounts:
           - name: probe
@@ -90,6 +90,13 @@ spec:
             periodSeconds: 10
             initialDelaySeconds: 2
             timeoutSeconds: 5
+        - name: config-reloader
+          # Run inotifyd to send config-reload command to ctrl-agent
+          image: "{{ .Values.ctrl_agent_image.repository }}:{{ .Values.ctrl_agent_image.tag | default .Chart.AppVersion }}"
+          args: [ "-c", "/kea/config/config.json" ]
+          volumeMounts:
+          - name: config
+            mountPath: /kea/config
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
