@@ -60,7 +60,7 @@ spec:
           securityContext:
             capabilities:
               add:
-              - NET_ADMIN
+              - NET_RAW
           volumeMounts:
           - name: config
             mountPath: /kea/config
