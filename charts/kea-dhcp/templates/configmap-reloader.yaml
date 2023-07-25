@@ -1,0 +1,25 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: {{ include "keadhcp.fullname" . }}-reloader
+data:
+  reloader.sh: |
+    #!/bin/sh
+    echo "reloader called with $@"
+    if [ "${a}" == "w" ]; then
+      echo `date`: config file changed - triggering reload
+      wget --header='Content-Type: application/json' \
+        --post-data='{ "command": "config-reload", "service": [ "dhcp4" ] }' \
+        --output-document - \
+        http://127.0.0.1:8000
+    fi
+#    while true; do
+#      inotifyd - /kea/config/dhcp4.json | while read a b x; do
+#        if [ "${a}" == "w" ]; then
+#          echo `date`: config file changed - triggering reload
+#          wget --header='Content-Type: application/json' --post-data='{ "command": "config-reload", "service": [ "dhcp4" ] }' --output-document - http://127.0.0.1:8000
+#        fi
+#      done
+#    done
