@@ -27,14 +27,16 @@ data:
       statistics-file "/var/cache/bind/data/named_stats.txt";
       memstatistics-file "/var/cache/bind/data/named_mem_stats.txt";
       allow-query { any; };
-
-      recursion yes;
-      allow-recursion { "good-guys"; };
       allow-query-cache { "good-guys"; };
+
+      recursion {{ .Values.recursion | default "no" }};
+      {{- if eq .Values.recursion yes }}
+      allow-recursion { "good-guys"; };
       #forward only;
       forwarders {
       {{ range .Values.forwarders }}
         {{ . }};
+      {{- end }}
       {{- end }}
       };
 

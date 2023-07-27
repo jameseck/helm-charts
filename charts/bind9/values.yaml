@@ -69,5 +69,6 @@ forwarders: []
 vlans: []
 bind_zones_extra: []
 bind_response_policy_zones: []
+#recursion: no
 
 aclAllowedNetworks: []
