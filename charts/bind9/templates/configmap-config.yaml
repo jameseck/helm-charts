@@ -30,7 +30,7 @@ data:
       allow-query-cache { "good-guys"; };
 
       recursion {{ .Values.recursion | default "no" }};
-      {{- if eq .Values.recursion yes }}
+      {{- if eq .Values.recursion "yes" }}
       allow-recursion { "good-guys"; };
       #forward only;
       forwarders {
