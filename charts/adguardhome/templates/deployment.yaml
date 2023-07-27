@@ -62,10 +62,10 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: dns-tcp
-              containerPort: 5353
+              containerPort: {{ .Values.dns_port | default "5353" }}
               protocol: TCP
             - name: dns-udp
-              containerPort: 5353
+              containerPort: {{ .Values.dns_port | default "5353" }}
               protocol: UDP
             - name: http
               containerPort: 8080

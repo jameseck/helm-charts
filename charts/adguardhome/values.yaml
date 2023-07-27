@@ -73,11 +73,11 @@ services:
     - name: dns-tcp
       port: 53
       protocol: TCP
-      targetPort: 5353
+      targetPort: 53
     - name: dns-udp
       port: 53
       protocol: UDP
-      targetPort: 5353
+      targetPort: 53
   web:
     enabled: true
     type: ClusterIP
@@ -158,5 +158,6 @@ tolerations: []
 
 affinity: {}
 
+dns_port: 53
 upstream_dns:
 - https://dns10.quad9.net/dns-query
