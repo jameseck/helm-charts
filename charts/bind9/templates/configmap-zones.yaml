@@ -49,6 +49,7 @@ data:
 {{- end }}
 {{- end }}
 {{- range $v := .Values.bind_zones_extra -}}
+{{- if ne $v.name "." }}
 {{- if ne $v.type "forward" }}
   {{ $v.name }}: |
     $ORIGIN {{ $v.name }}.
@@ -67,6 +68,7 @@ data:
     {{ printf "%-24s" $host.name }} IN A        {{ $host.ip }}
     {{- end }}
     {{- end }}
+{{- end }}
 {{- end }}
 {{- end }}
 {{- range $v := .Values.bind_response_policy_zones }}
