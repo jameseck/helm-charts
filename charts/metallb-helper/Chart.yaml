@@ -1,0 +1,7 @@
+apiVersion: v2
+name: metallb-helper
+description: A helper chart to deploy metallb crs
+type: application
+
+version: 0.1.1
+appVersion: "1.0.0"
