@@ -515,6 +515,17 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/kea-dhcp-0.1.0/kea-dhcp-0.1.0.tgz
     version: 0.1.0
+  metallb-helper:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-07-29T09:07:29.953479815Z"
+    description: A helper chart to deploy metallb crs
+    digest: 0b46d6b33c5fc488ce910cbeed7b9c1db606113f68d96a8fb16ee25e1471bae8
+    name: metallb-helper
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/metallb-helper-0.1.1/metallb-helper-0.1.1.tgz
+    version: 0.1.1
   piraeus-config:
   - apiVersion: v2
     appVersion: 1.0.0
@@ -814,4 +825,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/tftp-0.1.0/tftp-0.1.0.tgz
     version: 0.1.0
-generated: "2023-07-28T15:34:26.983263631Z"
+generated: "2023-07-29T09:07:29.953639617Z"
