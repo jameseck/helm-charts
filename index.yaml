@@ -518,6 +518,16 @@ entries:
   metallb-helper:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2023-07-30T08:42:23.600667055Z"
+    description: A helper chart to deploy metallb crs
+    digest: 3e930970e4a98fad3738935e877b2d5f3bd389619ea20629cdcad80040cfc4f0
+    name: metallb-helper
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/metallb-helper-0.1.2/metallb-helper-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2023-07-29T09:07:29.953479815Z"
     description: A helper chart to deploy metallb crs
     digest: 0b46d6b33c5fc488ce910cbeed7b9c1db606113f68d96a8fb16ee25e1471bae8
@@ -825,4 +835,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/tftp-0.1.0/tftp-0.1.0.tgz
     version: 0.1.0
-generated: "2023-07-29T09:07:29.953639617Z"
+generated: "2023-07-30T08:42:23.600789054Z"
