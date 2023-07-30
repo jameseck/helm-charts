@@ -6,8 +6,5 @@ metadata:
   name: {{ $p.name }}
   namespace: {{ $p.namespace }}
 spec:
-  addresses:
-  {{- range $addr := $p.addresses }}
-  - {{ $addr }}
-  {{- end }}
+{{- $p.spec | toYaml | nindent 2 }}
 {{- end }}

@@ -2,13 +2,15 @@
 #l2Advertisements:
 #- name: testadv
 #  namespace: metallb
-#  ipAddressPools:
-#  - first-pool
+#  spec:
+#    ipAddressPools:
+#    - first-pool
 
 #ipAddressPools:
 #- name: first-pool
 #  namespace: metallb
-#  addresses:
-#  - 1.1.1.1
-#  - 2.2.2.2
-#  - 3.3.3.3
+#  spec:
+#    addresses:
+#    - 1.1.1.1
+#    - 2.2.2.2
+#    - 3.3.3.3

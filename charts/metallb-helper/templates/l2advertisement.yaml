@@ -6,10 +6,5 @@ metadata:
   name: {{ $a.name }}
   namespace: {{ $a.namespace }}
 spec:
-  {{- if $a.ipAddressPools }}
-  ipAddressPools:
-  {{- range $pool := $a.ipAddressPools }}
-  - {{ $pool }}
-  {{- end }}
-  {{- end }}
+{{- $a.spec | toYaml | nindent 2 }}
 {{- end }}
