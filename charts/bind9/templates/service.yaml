@@ -20,6 +20,9 @@ spec:
 {{- if .Values.service.loadBalancerClass }}
   loadBalancerClass: {{ .Values.service.loadBalancerClass }}
 {{- end }}
+{{- if .Values.service.externalTrafficPolicy }}
+  externalTrafficPolicy: {{ .Values.service.externalTrafficPolicy }}
+{{- end }}
   ports:
   {{- .Values.service.ports | toYaml | nindent 4 }}
   selector:
