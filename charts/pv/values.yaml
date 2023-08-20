@@ -1,7 +1,6 @@
 ---
 #volumes:
 #- name: voltest
-#  namespace: ns
 #  spec:
 #    capacity:
 #      storage: 10Gi
