@@ -4,6 +4,7 @@ kind: PersistentVolume
 apiVersion: v1
 metadata:
   name: {{ $v.name }}
+  namespace: {{ $v.namespace }}
 {{- if $v.annotations }}
   annotations:
 {{ toYaml $v.annotations | nindent 4 }}
