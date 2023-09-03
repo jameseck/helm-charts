@@ -304,6 +304,17 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/cert-manager-issuers-0.1.0/cert-manager-issuers-0.1.0.tgz
     version: 0.1.0
+  coredns-config:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-09-03T11:04:05.62404674Z"
+    description: A Helm chart for managing the Corefile for coredns
+    digest: a7ffa1682da0db82fedd13c447cf25e995ceecc52f6afb9941ae7eb0e3d33bcf
+    name: coredns-config
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/coredns-config-0.0.2/coredns-config-0.0.2.tgz
+    version: 0.0.2
   kea-dhcp:
   - apiVersion: v2
     appVersion: 1.0.0
@@ -885,4 +896,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/tftp-0.1.0/tftp-0.1.0.tgz
     version: 0.1.0
-generated: "2023-08-20T05:44:39.931151864Z"
+generated: "2023-09-03T11:04:05.624256941Z"
