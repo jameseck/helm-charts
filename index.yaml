@@ -758,6 +758,16 @@ entries:
   tftp:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2023-11-27T17:39:50.495344737Z"
+    description: A Helm chart for tftp
+    digest: 018586717003503e775b18514c79aa9c474ad57274e433ef67231c06c40d6bba
+    name: tftp
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/tftp-0.2.4/tftp-0.2.4.tgz
+    version: 0.2.4
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2023-06-20T12:55:31.553819428Z"
     description: A Helm chart for tftp
     digest: af6a72e3284b232056aab392eb4f7ff500efa2aa56d9d32fc96880e64498523d
@@ -896,4 +906,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/tftp-0.1.0/tftp-0.1.0.tgz
     version: 0.1.0
-generated: "2023-09-03T11:04:05.624256941Z"
+generated: "2023-11-27T17:39:50.495627255Z"
