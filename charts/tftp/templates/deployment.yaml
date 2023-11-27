@@ -58,6 +58,8 @@ spec:
           volumeMounts:
           - name: assets
             mountPath: /assets
+          - name: configmenus
+            mountPath: /config/menus
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -72,9 +74,16 @@ spec:
       {{- end }}
       volumes:
       - name: assets
-        {{- if .Values.persistence.assets.enabled }}
+        {{- if (.Values.persistence.assets).enabled }}
         persistentVolumeClaim:
           claimName: {{ .Values.persistence.assets.existingClaim | default (print (include "tftp.fullname" $) "-assets") }}
+        {{- else }}
+        emptyDir: {}
+        {{- end }}
+      - name: configmenus
+        {{- if (.Values.persistence.configmenus).enabled }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.persistence.configmenus.existingClaim | default (print (include "tftp.fullname" $) "-configmenus") }}
         {{- else }}
         emptyDir: {}
         {{- end }}
