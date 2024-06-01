@@ -1,8 +1,9 @@
 {{- define "keadhcp.subnet4" -}}
 subnet4:
-{{- range $k,$v := .Values.vlans -}}
+{{- range $v := .Values.vlans -}}
 {{- if (or (not (hasKey $v "enable_dhcp")) (and (hasKey $v "enable_dhcp") ($v.enable_dhcp))) }}
-- subnet: {{ $v.subnet }}/{{ $v.cidr }}
+- id: {{ $v.vlan }}
+  subnet: {{ $v.subnet }}/{{ $v.cidr }}
   next-server: {{ $v.next_server | default $.Values.next_server }}
 {{- if $v.valid_lifetime }}
   valid-lifetime: {{ $v.valid_lifetime }}
@@ -25,12 +26,14 @@ subnet4:
     data: {{ $v.domain }}
   pools:
   - pool: {{ $v.range_begin }}-{{ $v.range_end }}
+  {{- if $v.hosts }}
   reservations:
   {{- range $host := $v.hosts }}
   {{- if $host.mac }}
   - hostname: {{ $host.name }}
     hw-address: {{ $host.mac }}
     ip-address: {{ $host.ip }}
+  {{- end }}
   {{- end }}
   {{- end }}
 {{- end }}

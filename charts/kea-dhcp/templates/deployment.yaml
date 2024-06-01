@@ -13,12 +13,12 @@ spec:
     type: Recreate
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
       annotations:
         checksum/configmap-config: {{ include (print $.Template.BasePath "/configmap-dhcp.yaml") $ | sha256sum }}
         checksum/configmap-ctrl-agent: {{ include (print $.Template.BasePath "/configmap-ctrl-agent.yaml") $ | sha256sum }}
+        {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
-      {{- end }}
+        {{- end }}
       labels:
         {{- include "keadhcp.selectorLabels" . | nindent 8 }}
     spec:

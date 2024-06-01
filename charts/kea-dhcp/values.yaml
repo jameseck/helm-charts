@@ -5,12 +5,12 @@ replicaCount: 1
 image:
   repository: docker.io/jonasal/kea-dhcp4
   pullPolicy: IfNotPresent
-  tag: 2.3.3-alpine
+  tag: 2.6-alpine
 
 ctrl_agent_image:
   repository: docker.io/jonasal/kea-ctrl-agent
   pullPolicy: IfNotPresent
-  tag: 2.3.3-alpine
+  tag: 2.6-alpine
 
 imagePullSecrets: []
 nameOverride: ""
