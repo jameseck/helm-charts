@@ -1,5 +1,4 @@
 ---
-
 replicaCount: 1
 
 image:
@@ -15,6 +14,13 @@ ctrl_agent_image:
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
+
+service:
+  enabled: true
+  type: LoadBalancer
+  allocateLoadBalancerNodePorts: true
+  externalTrafficPolicy: Local
+  internalTrafficPolicy: Cluster
 
 serviceAccount:
   # Specifies whether a service account should be created

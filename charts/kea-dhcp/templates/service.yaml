@@ -1,0 +1,29 @@
+{{- if (.Values.service).enabled -}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "keadhcp.fullname" . }}
+  annotations:
+  {{- with (.Values.service).annotations }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "keadhcp.labels" . | nindent 4 }}
+spec:
+  allocateLoadBalancerNodePorts: {{ .Values.service.allocateLoadBalancerNodePorts | default true }}
+  externalTrafficPolicy: {{ .Values.service.externalTrafficPolicy | default "Local" }}
+  internalTrafficPolicy: {{ .Values.service.internalTrafficPolicy | default "Cluster" }}
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: dhcp
+    port: 67
+    protocol: UDP
+    targetPort: 67
+  selector:
+    {{- include "keadhcp.selectorLabels" . | nindent 4 }}
+  sessionAffinity: None
+  type: {{ .Values.service.type }}
+{{- end }}
