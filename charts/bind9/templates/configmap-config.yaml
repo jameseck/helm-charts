@@ -74,10 +74,12 @@ data:
     {{- $ztype := $v.type | default "master" }}
     zone "{{ $v.name }}" IN {
       type {{ $ztype }};
-    {{- if $v.file }}
+    {{- if ne $ztype "forward" }}
+      {{- if $v.file }}
       file "{{ $v.file }}";
-    {{- else }}
+      {{- else }}
       file "/var/cache/zones/{{ $v.name }}";
+      {{- end }}
     {{- end }}
     {{- if eq $ztype "forward" }}
       forward only;
