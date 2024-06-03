@@ -72,8 +72,12 @@ data:
 {{- end }}
 {{- range $v := .Values.bind_zones_extra }}
     zone "{{ $v.name }}" IN {
+    {{- if $v.type }}
+      type {{ $v.type }};
+    {{- else }}
+      type master;
+    {{- end }}
     {{- if eq $v.type "forward" }}
-      type forward;
       forward only;
       forwarders {
       {{- range $v.forwarders }}
@@ -81,8 +85,11 @@ data:
       {{- end }}
       };
     {{- else }}
-      type master;
+    {{- if $v.file }}
+      file "{{ $v.file }}";
+    {{- else }}
       file "/var/cache/zones/{{ $v.name }}";
+    {{- end }}
       notify yes;
       allow-update { none; };
     {{- end }}
