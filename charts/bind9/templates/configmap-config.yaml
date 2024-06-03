@@ -34,9 +34,9 @@ data:
       allow-recursion { "good-guys"; };
       #forward only;
       forwarders {
-      {{ range .Values.forwarders }}
+      {{- range .Values.forwarders }}
         {{ . }};
-      {{- end }}
+      {{ end -}}
       };
       {{- else }}
       recursion no;
@@ -71,27 +71,26 @@ data:
 {{- end }}
 {{- end }}
 {{- range $v := .Values.bind_zones_extra }}
+    {{- $ztype := $v.type | default "master" }}
     zone "{{ $v.name }}" IN {
-    {{- if $v.type }}
-      type {{ $v.type }};
-    {{- else }}
-      type master;
-    {{- end }}
-    {{- if eq $v.type "forward" }}
-      forward only;
-      forwarders {
-      {{- range $v.forwarders }}
-        {{ . }};
-      {{- end }}
-      };
-    {{- else }}
+      type {{ $ztype }};
     {{- if $v.file }}
       file "{{ $v.file }}";
     {{- else }}
       file "/var/cache/zones/{{ $v.name }}";
     {{- end }}
+    {{- if eq $ztype "forward" }}
+      forward only;
+      forwarders {
+    {{- range $v.forwarders }}
+        {{ . }};
+    {{- end }}
+      };
+    {{- else }}
+      {{- if eq $ztype "master" }}
       notify yes;
       allow-update { none; };
+      {{- end }}
     {{- end }}
     };
 {{- end }}
