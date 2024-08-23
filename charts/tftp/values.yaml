@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   #repository: ghcr.io/jameseck/tftp
-  repository: lscr.io/linuxserver/netbootxyz
+  repository: ghcr.io/linuxserver/netbootxyz
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
