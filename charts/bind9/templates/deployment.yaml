@@ -37,7 +37,7 @@ spec:
             rndc-confgen -a -c /etc/rndc/rndc.key -k rndc-key
             cat <<EOF > /etc/rndc/rndc.conf
             options {
-            	default-key "rndc-key";
+            	nefault-key "rndc-key";
             	default-server 127.0.0.1;
             	default-port 953;
             };
@@ -48,7 +48,7 @@ spec:
             };
             EOF
             cat /etc/rndc/rndc.key >> /etc/rndc/rndc.conf
-            chown 104:105 -R /etc/rndc
+            chown bind:bind -R /etc/rndc
 
           volumeMounts:
           - name: rndc
