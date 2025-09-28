@@ -796,6 +796,16 @@ entries:
   storageclasses:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2025-09-28T09:54:11.764255657Z"
+    description: A Helm chart
+    digest: aefd74572fcf2dec2f9e303afdb4c93ac37a42037fe23c826bcbb35dc33c0492
+    name: storageclasses
+    type: application
+    urls:
+    - https://github.com/jameseck/helm-charts/releases/download/storageclasses-0.1.2/storageclasses-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2023-04-16T07:29:36.764782799Z"
     description: A Helm chart
     digest: 0c34b25b9abc62b1825032114d1177d047a6671b5ecfec7562a3946d9aa32628
@@ -976,4 +986,4 @@ entries:
     urls:
     - https://github.com/jameseck/helm-charts/releases/download/tftp-0.1.0/tftp-0.1.0.tgz
     version: 0.1.0
-generated: "2024-09-01T20:15:12.739819998Z"
+generated: "2025-09-28T09:54:11.76454062Z"
